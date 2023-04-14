@@ -1,0 +1,100 @@
+1# A method that takes the sum of two integers
+
+- prompt user for two integers
+- get input from user and validate that the input is an integer. if so, assign input to a varilable Else return error
+- add the two integers and assign them to a variable
+- print the variable
+
+START
+
+GET input from user
+Validate input == integer
+SET Number1 = input
+
+GET input 2 from user
+Vallidate input == integer
+SET number2 = input
+
+SET sum = number1 + number2
+PRINT sum
+
+2# A method that takes an array of strings, and returns a string that is all those string concatenated together
+
+Given an array of strings
+
+Create an empty string and assign to a variable
+create a method that iterates through the array of strings one by one
+  - For each iteration, append each element of the array collection to the string variable
+
+Return the string
+
+START
+
+SET output_string
+
+GET array_of_strings
+  ITERATE each input_string
+  SET to output_string
+PRINT output string
+
+3# a method that take an array of integers, and returns a new array with with 
+every other element from the original array, starting with the first element 
+
+GIVEN an array of integers 
+
+Create a new array called even_integers
+
+Iterate through the given array
+  -append the value of the elements at space 0 and even spaces to even_integers
+
+
+START
+
+Given an array of integers
+
+Set result = array
+SET counter +1
+While counter < array size
+  iterate over the array elements
+  add to the result first element and skip following
+
+Return result
+
+3# a method that determines the index of the occurrence 
+of a given character in a shring
+
+GET array
+SET Index = +1
+IF array[] = odd?
+  add to new_array
+Else  
+  next
+Break when array index = 0
+end
+
+#4
+
+GET string
+
+Counter = 0
+String Split
+occurance = String each
+If occurance == x
+  counter = 1
+  next
+Else
+  Counter = 3
+Break
+end
+
+#5
+
+Get array1
+Get array2
+
+
+
+
+
+
+
