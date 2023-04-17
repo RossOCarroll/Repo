@@ -1,0 +1,26 @@
+
+
+
+what is != and where should you use it?
+  != Checks to see if the value of two operators are equal or not, 
+  if values are not equal then condition becomes true.
+
+put ! before something, like !user_name
+  ! at the end of the method is part of the method name and usually mutates the object
+
+put ! after something, like words.uniq!
+  ! at the end of the method is part of the method name and usually mutates 
+  the object depends on the implmentation
+
+put ? before something
+  is the terney operator for if..else
+
+
+put ? after something
+
+
+put !! before something, like !!user_name
+  !! is used to turn any obl=jest into their boolean equvalent
+  ! is used to turn any object into the opposite of their boolean equvalent
+
+

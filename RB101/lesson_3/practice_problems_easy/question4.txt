@@ -1,0 +1,3 @@
+The delete_at method deletes an object at a specific index, and the
+delete method deletes all instances of a certian object.
+
