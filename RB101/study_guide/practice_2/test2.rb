@@ -1,9 +1,12 @@
-def plus(x, y)
-  x = x + y
+def test
+  puts "written assessment"
 end
 
-a = 3
-b = plus(a, 2)
+p var = test
 
-puts a
-puts b
+if var
+  puts "written assessment"
+else
+  puts "interview"
+end
+

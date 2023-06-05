@@ -1,0 +1,15 @@
+```ruby
+def add_name(arr, name)
+  arr = arr + [name]
+end
+
+names = ['bob', 'kim']
+add_name(names, 'jim')
+puts names
+```
+
+This code outputs the array containing the the string objects bob and kim. The code will return nil as the puts method was invoked on the local variable name on line 8, the puts method always returns nil. 
+
+On line 7 the add_name method is invoked we the names variable and the string 'jim' passed to it as an argument. On line 2 the add_name method is defined with arr and name as parameters. Line 3 we have a reassignment of arr to arr concatenated with the 'jim' string passed to add_name method. 
+
+One might expect the puts method called on the name variable to output an array ['bob', 'kim', 'jim']. but this would be incorrect as the method has its own scope and doesnt effect not mutate the 'names' variable.
