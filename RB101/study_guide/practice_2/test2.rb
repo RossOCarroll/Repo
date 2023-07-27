@@ -2,7 +2,7 @@ def test
   puts "written assessment"
 end
 
-p var = test
+var = test
 
 if var
   puts "written assessment"
