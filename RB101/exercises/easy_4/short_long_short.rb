@@ -8,3 +8,5 @@ end
 
 puts short_long_short('abc', 'defgh')
 puts short_long_short('abcde', 'fgh')
+
+
