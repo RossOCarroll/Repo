@@ -1,9 +1,14 @@
-array = [0, 1, 2, 3, 4, 5]
+arr = [1, 2, 3, 4]
 
-1.times { index = 0 }
+counter = 0
+sum = 0
 
 loop do
-  puts array[index]
-  index += 1
-  break if index >= array.length
-end
+  sum += arr[counter]
+  counter += 1
+  break if counter == arr.size
+end 
+
+puts "Your total is #{sum}"
+
+
