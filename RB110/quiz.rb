@@ -1,46 +1,46 @@
-mailing_campaign_leads = [
-  {name: 'Emma Lopez', email: 'emma.lopez@some_mail.com', days_since_login: 423, mailing_list: true},
-  {name: 'mike richards', email: 'michael.richards@some_mail.com', days_since_login: 23, mailing_list: false},
-  {name: 'JANE WILLIAMS', email: 'jane_w95@my_mail.com', days_since_login: 16, mailing_list: true},
-  {name: 'Ash Patel', email: 'ash_patel@my_mail.com', days_since_login: 22, mailing_list: true}
+order_data = [
+  {customer_id: 12, customer_name: 'Emma Lopez', order_id: 351, order_date: '12/04/16', order_fulfilled: true, order_value: 135.99},
+  {customer_id: 12, customer_name: 'Emma Lopez', order_id: 383, order_date: '12/04/16', order_fulfilled: true, order_value: 289.49},
+  {customer_id: 12, customer_name: 'Emma Lopez', order_id: 392, order_date: '01/10/17', order_fulfilled: false, order_value: 58.00},
+  {customer_id: 32, customer_name: 'Michael Richards', order_id: 241, order_date: '11/10/16', order_fulfilled: true, order_value: 120.00},
+  {customer_id: 32, customer_name: 'Michael Richards', order_id: 395, order_date: '01/10/17', order_fulfilled: false, order_value: 85.65},
+  # rest of data...
 ]
 
 
-counter = 0
+customer_orders2 = [
+  {
+    customer_id: 12,
+    customer_name: 'Emma Lopez',
+    orders: [
+      { order_fulfilled: true, order_value: 135.99 },
+      { order_fulfilled: true, order_value: 289.49 },
+      { order_fulfilled: false, order_value: 58.00 }
+    ]
+  },
+  {
+    customer_id: 32,
+    customer_name: 'Michael Richards',
+    orders: [
+      { order_fulfilled: true, order_value: 120.00 },
+      { order_fulfilled: false, order_value: 85.65 }
+    ]
+  },
+  # rest of data...
+]
 
-loop do
-  break if counter == mailing_campaign_leads.size
-  full_name = mailing_campaign_leads[counter][:name]
-  names = full_name.split
-
-  names_counter = 0
-  loop do
-    break if names_counter == names.size
-    name = names[names_counter]
-    names[names_counter] = name.capitalize
-
-    names_counter += 1
-  end
-
-  capitalized_full_name = names.join(' ')
-  mailing_campaign_leads[counter][:name] = capitalized_full_name
-
-  counter += 1
+customer_orders = order_data.map do |row|
+  {
+    customer_id: row[:customer_id],
+    customer_name: row[:customer_name],
+    orders: [
+      {
+        order_fulfilled: row[:order_fulfilled],
+        order_value: row[:order_value]
+      }
+    ]
+  }
 end
 
-usable_leads = []
-counter = 0
+p customer_orders == customer_orders2
 
-loop do
-  break if counter == mailing_campaign_leads.size
-  last_login = mailing_campaign_leads[counter][:days_since_login]
-  subscribed_to_list = mailing_campaign_leads[counter][:mailing_list]
-
-  if last_login < 60 && subscribed_to_list
-    usable_leads << mailing_campaign_leads[counter]
-  end
-
-  counter += 1
-end
-
-p usable_leads
