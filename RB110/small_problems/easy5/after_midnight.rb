@@ -41,21 +41,21 @@
 MIN_IN_DAY = 1440
   
 def time_of_day(minutes)
-  if minutes >= 0 && minutes < 1439
-    hours = minutes % MIN_IN_DAY
-    p hours
-  end
+  minutes_per_day = 1440
+
+  minutes = (minutes % minutes_per_day + minutes_per_day) % minutes_per_day
 
 
+  hours = minutes / 60
+  minutes %= 60
 
-
-
+  format('%02d:%02d', hours, minutes)
 end
 
 puts time_of_day(0) #== "00:00"
-#puts time_of_day(-3) #== "23:57"
+puts time_of_day(-3) #== "23:57"
 puts time_of_day(35) #== "00:35"
-# time_of_day(-1437) == "00:03"
-# time_of_day(3000) == "02:00"
-# time_of_day(800) == "13:20"
-# time_of_day(-4231) == "01:29"
+puts time_of_day(-1437) #== "00:03"
+puts time_of_day(3000) #== "02:00"
+puts time_of_day(800) #== "13:20"
+puts time_of_day(-4231) #== "01:29"
