@@ -7,8 +7,7 @@ order_data = [
   # rest of data...
 ]
 
-
-customer_orders2 = [
+customer_orders = [
   {
     customer_id: 12,
     customer_name: 'Emma Lopez',
@@ -29,18 +28,37 @@ customer_orders2 = [
   # rest of data...
 ]
 
-customer_orders = order_data.map do |row|
+
+# all_orders =[
+#   {customer_id: 12, customer_name: 'Emma Lopez', total_order_value: 483.48},
+#   {customer_id: 32, customer_name: 'Michael Richards', total_order_value: 205.65},
+#   # rest of data
+# ]
+
+# fulfilled_orders =[
+#   {customer_id: 12, customer_name: 'Emma Lopez', order_value: 425.48},
+#   {customer_id: 32, customer_name: 'Michael Richards', order_value: 120.00},
+#   # rest of data
+# ]
+
+
+fulfilled_orders = customer_orders.map do |customer|
   {
-    customer_id: row[:customer_id],
-    customer_name: row[:customer_name],
-    orders: [
-      {
-        order_fulfilled: row[:order_fulfilled],
-        order_value: row[:order_value]
-      }
-    ]
+    customer_id: customer[:customer_id],
+    customer_name: customer[:customer_name]
   }
 end
 
-p customer_orders == customer_orders2
+customer_orders.each_with_index do |data, index|
+  order_value = data[:orders].reduce(0) do |total, order|
+    if order[:order_fulfilled] 
+      total + order[:order_value] 
+    else  
+      total
+    end
+  end
 
+  fulfilled_orders[index][:order_value] = order_value
+end
+
+p fulfilled_orders
