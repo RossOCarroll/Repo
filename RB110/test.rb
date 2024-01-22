@@ -1,8 +1,8 @@
-x = [['a', 'b'], ['c', 'd'], ['e', 'f']].map do |sub_arr|
-  C =  sub_arr.map do |letter|
-    letter.upcase
-  end
+qux = [123, ['a'], nil, 'zappa']
+foo = ['a', 1, ['a'], {'1': 1}, nil]
+
+common_elements = foo.select do |ele|
+  qux.include?(ele) ? true : false
 end
 
-
-p C
+p common_elements
