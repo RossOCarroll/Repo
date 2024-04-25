@@ -1,54 +1,26 @@
-class Wedding
-  attr_reader :guests, :flowers, :songs
+module Describable
 
-  def initialize
-    @guests = ["Billy", "Jessica"]
-    @flowers = ["lilies", "tulips"]
-    @songs = ["Eye of the Tiger", "Africa"]
-  end
-
-  def prepare(preparers)
-    preparers.each do |preparer|
-      preparer.prepare_wedding(self)
-    end
-  end
-
-end
-
-class Chef
-  def prepare_wedding(wedding)
-    prepare_food(wedding.guests)
-  end
-
-  def prepare_food(guests)
-    puts "Preparing food for #{guests[0]} and #{guests[1]}"
+  def describe_shape
+    "I am a #{self.class} and have #{self.class::SIDES} sides."
   end
 end
 
-class Decorator
-  def prepare_wedding(wedding)
-    decorate_place(wedding.flowers)
-  end
+class Shape
+  include Describable
 
-  def decorate_place(flowers)
-    puts "Placing the #{flowers[0]} and #{flowers[1]} on the tables"
+  def self.sides
+    self::SIDES  
   end
 end
 
-class Musician
-  def prepare_wedding(wedding)
-    prepare_performance(wedding.songs)
-  end
-
-  def prepare_performance(songs)
-    puts "Qeueing up #{songs[0]} and #{songs[1]}"
-  end
+class Quadrilateral < Shape
+  SIDES = 4
 end
 
-joe = Chef.new
-bob = Decorator.new
-linda = Musician.new
-staff = [joe, bob, linda]
-sean_and_dyani = Wedding.new
-sean_and_dyani.prepare(staff)
+class Square < Quadrilateral; end
+
+p Square.sides # => 4
+p Square.new.sides # => 4
+p Square.new.describe_shape # => "I am a Square and have 4 sides."
+
 
