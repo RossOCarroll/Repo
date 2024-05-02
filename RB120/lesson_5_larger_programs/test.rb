@@ -1,16 +1,15 @@
-WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
-[[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # cols
-[[1, 5, 9], [3, 5, 7]]   
-
-squares = {}
-(1..9).each {|key| squares[key] = ' '}
-
-squares[3] = 'X'
-squares[1] = 'X'
 
 
-puts squares
 
-WINNING_LINES.each do |line| 
-  p *line
+total = []
+
+[["J", "D"], ["10", "H"]].each do |card|
+  case card[0]
+  when 'J', 'Q', 'K' then total << 10
+  when 'A' then total << 11
+  else total << card[0].to_i
+  end
+
 end
+
+p total
