@@ -42,6 +42,52 @@ class Participant
 end
 
 class Player < Participant
+  attr_accessor :money
+
+  def initialize
+    super
+    @money = 20
+    @hand = []
+  end
+
+  def get_name
+    loop do
+      puts "=> Whats the players name?"
+      @name = gets.chomp
+      break if !@name.empty?
+      puts "Sorry must enter a name"
+    end
+  end
+
+  def take_turn(deck)
+    loop do
+      puts "=> Would you like to Hit or Stay (h or s)"
+      answer = gets.chomp.downcase
+      if !%w(h s).include?(answer)
+        puts "=> Not a valid Choice"
+        next
+      end
+      break if answer == 's'
+      hit(deck.deal)
+      show_player_cards
+      break if busted?
+    end
+  end
+
+  def show_player_cards
+    player_card_names = hand.map { |card| Deck.card_name(card) }
+    puts "#{name}'s cards: #{player_card_names.join(', ')} a total of #{total}"
+    Deck.cards_layout(hand)
+  end
+
+  
+
+  # def place_bet
+  #   loop do 
+  #     puts "What would you like to bet?"
+  #     bet = gets.chomp.to_i
+  # end
+
 end
 
 class Dealer < Participant
@@ -51,9 +97,37 @@ class Dealer < Participant
     super
     @name = ROBOTS.sample
   end
+
+  def show_dealer_cards
+    dealer_card_names = hand.map { |card| Deck.card_name(card) }
+    puts "#{name} hand: #{dealer_card_names.join(', ')} a total of #{total}"
+    Deck.cards_layout(hand)
+  end
+
+  def dealer_turn(deck)
+    
+    show_dealer_cards
+    while total < 17
+      hit(deck.deal)
+      show_dealer_cards
+      break if busted?
+    end
+  end
+
+  def self.dealer_initial_card(card)
+    puts "+-----+"
+    puts "|#{card[1]}    |"
+    if card[0] == '10'
+      puts "| #{card[0]}  |"
+    else
+      puts "|  #{card[0]}  |"
+    end
+    puts "|    #{card[1]}|"
+    puts "+-----+"
+  end
 end
 
-class Deck
+class Deck 
   attr_reader :cards
 
   SUITS = ['H', 'D', 'S', 'C']
@@ -72,6 +146,11 @@ class Deck
     end
   end
 
+  def reshuffle_deck
+    @cards.clear
+    generate_deck
+  end
+
   def deal
     @cards.pop
   end
@@ -79,6 +158,46 @@ class Deck
   def shuffle
     @cards.shuffle!
   end
+
+  def self.cards_layout(cards)
+    horizontal_separator = "+-----+" * cards.size
+    suits = cards.map { |_, suit| "|#{suit}    |" }.join('')
+    faces = cards.map do |face, _|
+      if face == '10'
+        "|  #{face} |"
+      else
+        "|  #{face}  |"
+      end
+    end.join('')
+    suit_symbols = cards.map { |_, suit| "|    #{suit}|" }.join('')
+    
+    puts horizontal_separator
+    puts suits
+    puts faces
+    puts suit_symbols
+    puts horizontal_separator
+  end
+
+  def self.card_name(card)
+    face, suit = card
+    suit_name = case suit
+                when 'H' then "Hearts"
+                when 'C' then "Clubs"
+                when 'S' then "Spades"
+                when 'D' then "Diamonds"
+                end
+
+    face_name = case face
+                when 'J' then "Jack"
+                when 'Q' then "Queen"
+                when 'K' then "King"
+                when 'A' then "Ace"
+                else face
+                end
+
+    "#{face_name} of #{suit_name}"
+  end
+
 end
 
 class TwentyOne
@@ -92,19 +211,19 @@ class TwentyOne
 
   def start
     welcome_message
-    player_name
+    player.get_name
     loop do
       system 'clear'
       deal_cards
       show_initial_cards
-      player_turn
+      player.take_turn(deck)
       if player.busted?
         player_bust_display
         break unless play_again?
         start_new_round
         next
       end
-      dealer_turn
+      dealer.dealer_turn(deck)
       if dealer.busted?
         dealer_bust_display
         break unless play_again?
@@ -118,12 +237,11 @@ class TwentyOne
     display_goodbye_message
   end
 
-  def player_name
-    puts "=> Whats the players name?"
-    player.name = gets.chomp
-  end
-
   def deal_cards
+    if deck.cards.size < 26
+      puts "Reshuffling Cards..."
+      deck.reshuffle_deck
+    end
     deck.shuffle
     2.times { player.hit(deck.deal) }
     2.times { dealer.hit(deck.deal) }
@@ -135,34 +253,11 @@ class TwentyOne
   end
 
   def show_initial_cards
-    player_card_names = player.hand.map { |card| card_name(card) }
+    player_card_names = player.hand.map { |card| Deck.card_name(card) }
     puts "#{player.name}'s initial cards: #{player_card_names.join(', ')} a total of #{player.total}"
-    puts "#{dealer.name}'s initial card: #{card_name(dealer.hand[0])}"
-  end
-
-  def show_player_cards
-    player_card_names = player.hand.map { |card| card_name(card) }
-    puts "#{player.name}'s cards: #{player_card_names.join(', ')} a total of #{player.total}"
-  end
-
-  def show_dealer_cards
-    dealer_card_names = dealer.hand.map { |card| card_name(card) }
-    puts "#{dealer.name} hand: #{dealer_card_names.join(', ')} a total of #{dealer.total}"
-  end
-
-  def player_turn
-    loop do
-      puts "=> Would yo like to Hit or Stay (h or s)"
-      answer = gets.chomp.downcase
-      if !%w(h s).include?(answer)
-        puts "=> Not a valid Choice"
-        next
-      end
-      break if answer == 's'
-      player.hit(deck.deal)
-      show_player_cards
-      break if player.busted?
-    end
+    Deck.cards_layout(player.hand)
+    puts "#{dealer.name}'s initial card: #{Deck.card_name(dealer.hand[0])}"
+    Dealer.dealer_initial_card(dealer.hand[0])
   end
 
   def player_bust_display
@@ -171,16 +266,6 @@ class TwentyOne
 
   def dealer_bust_display
     puts "=> #{dealer.name} got #{dealer.total} Dealer Bust, Player wins"
-  end
-
-  def dealer_turn
-    
-    show_dealer_cards
-    while dealer.total < 17
-      dealer.hit(deck.deal)
-      show_dealer_cards
-      break if dealer.busted?
-    end
   end
 
   def show_result
@@ -216,25 +301,7 @@ class TwentyOne
     answer == 'y'
   end
 
-  def card_name(card)
-    face, suit = card
-    suit_name = case suit
-                when 'H' then "Hearts"
-                when 'C' then "Clubs"
-                when 'S' then "Spades"
-                when 'D' then "Diamonds"
-                end
 
-    face_name = case face
-                when 'J' then "Jack"
-                when 'Q' then "Queen"
-                when 'K' then "King"
-                when 'A' then "Ace"
-                else face
-                end
-
-    "#{face_name} of #{suit_name}"
-  end
 end
 
 TwentyOne.new.start
