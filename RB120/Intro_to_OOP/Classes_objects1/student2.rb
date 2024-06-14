@@ -1,0 +1,21 @@
+class Student
+  attr_reader :name
+  def initialize(name, grade)
+    @name = name
+    @grade = grade
+  end
+
+  def better_grade_than?(other_student)
+    self.grade > other_student.grade
+  end
+
+  protected
+
+  attr_reader :grade
+end
+
+joe = Student.new('Joe', 85)
+steve = Student.new('Steve', 80)
+
+puts "Well done!" if joe.better_grade_than?(steve)
+

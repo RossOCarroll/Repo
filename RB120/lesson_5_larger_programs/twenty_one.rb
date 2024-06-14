@@ -42,12 +42,13 @@ class Participant
 end
 
 class Player < Participant
-  attr_accessor :money
+  attr_accessor :money, :bet
 
   def initialize
     super
     @money = 20
     @hand = []
+    @bet = 0
   end
 
   def get_name
@@ -80,13 +81,26 @@ class Player < Participant
     Deck.cards_layout(hand)
   end
 
-  
+  def place_bet
+    self.bet = 0
+    loop do 
+      puts "You have $#{money}. What would you like to bet?"
+      player_bets = gets.chomp.to_i
+      if player_bets > money
+        puts "I'm sorry, you don't have enough money to place that bet."
+      elsif player_bets <= 0
+        puts "Please enter a valid bet amount."
+      else
+        self.money -= self.bet
+        self.bet = player_bets
+        break
+      end
+    end
+  end
 
-  # def place_bet
-  #   loop do 
-  #     puts "What would you like to bet?"
-  #     bet = gets.chomp.to_i
-  # end
+  def broke?
+    money <= 0
+  end
 
 end
 
@@ -214,6 +228,7 @@ class TwentyOne
     player.get_name
     loop do
       system 'clear'
+      player.place_bet
       deal_cards
       show_initial_cards
       player.take_turn(deck)
@@ -231,6 +246,10 @@ class TwentyOne
         next
       end
       show_result
+      if player.broke?
+        puts "You're Broke you must leave the game!"
+        break
+      end
       break unless play_again?
       start_new_round
     end
@@ -262,10 +281,14 @@ class TwentyOne
 
   def player_bust_display
     puts "=> #{player.name} got #{player.total} Player Bust, Dealer wins"
+    player.money -= player.bet
+    puts "=> You've lost your $#{player.bet} bet, you now have $#{player.money}"
   end
 
   def dealer_bust_display
     puts "=> #{dealer.name} got #{dealer.total} Dealer Bust, Player wins"
+    player.money += (player.bet * 2)
+    puts "=> You've won $#{(player.bet * 2)} you now have $#{player.money}"
   end
 
   def show_result
@@ -273,11 +296,16 @@ class TwentyOne
       puts "=> #{dealer.name} total: #{dealer.total}"
       puts "=> #{player.name} total: #{player.total}"
       puts "=> #{dealer.name} wins!"
+      player.money -= player.bet
+      puts "=> You've lost your $#{player.bet} bet, you now have $#{player.money}"
     elsif dealer.total < player.total
       puts "=> #{dealer.name}  total: #{dealer.total}"
       puts "=> #{player.name} total: #{player.total}"
       puts "=> #{player.name} wins!"
+      player.money += (player.bet * 2)
+      puts "=> You've won $#{(player.bet * 2)} you now have $#{player.money}"
     else
+      player.money += player.bet
       puts "Its a Tie!"
     end
   end
@@ -300,8 +328,6 @@ class TwentyOne
     end
     answer == 'y'
   end
-
-
 end
 
 TwentyOne.new.start
