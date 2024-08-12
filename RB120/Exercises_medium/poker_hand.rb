@@ -29,9 +29,9 @@ class Card
 
   end
 
-  # def to_s
-  #   "The #{rank} of #{suit}"
-  # end
+  def to_s
+    "The #{rank} of #{suit}"
+  end
 end
 
 class Deck
@@ -72,7 +72,7 @@ end
 class PokerHand
   attr_reader :hand
   def initialize(hand)
-    #@deck = deck
+    @deck = deck
     @hand = hand
 
   end
@@ -86,18 +86,18 @@ class PokerHand
   end
 
   def evaluate
-    # case
-    # when royal_flush?     then 'Royal flush'
-    # when straight_flush?  then 'Straight flush'
-    # when four_of_a_kind?  then 'Four of a kind'
-    # when full_house?      then 'Full house'
-    # when flush?           then 'Flush'
-    # when straight?        then 'Straight'
-    # when three_of_a_kind? then 'Three of a kind'
-    # when two_pair?        then 'Two pair'
-    # when pair?            then 'Pair'
-    # else                       'High card'
-    # end
+    case
+    when royal_flush?     then 'Royal flush'
+    when straight_flush?  then 'Straight flush'
+    when four_of_a_kind?  then 'Four of a kind'
+    when full_house?      then 'Full house'
+    when flush?           then 'Flush'
+    when straight?        then 'Straight'
+    when three_of_a_kind? then 'Three of a kind'
+    when two_pair?        then 'Two pair'
+    when pair?            then 'Pair'
+    else                       'High card'
+    end
     pair?
   end
 
