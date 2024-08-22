@@ -1,0 +1,4 @@
+
+
+
+assert_empty(list)
