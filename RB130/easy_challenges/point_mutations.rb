@@ -19,7 +19,7 @@ Data Structure:
   -String
   -Arrays
 
-Constructor 
+Constructor
   -Accept DNA strand string as an argument
   -Save to instance variable
 
@@ -28,29 +28,22 @@ Method compute hamming distance hamming_distance
   -Set counter to 0
   -Based on the shorter strings length iterate through bother the DNA strand strings and com pare each character
     -If characters are different increment counter
-
-
 =end
 
-
-
-
-class DNA 
+# The DNA class is used to calculate the Hamming distance between two DNA strands.
+class DNA
   def initialize(strand)
     @strand = strand
   end
 
   def hamming_distance(comparison)
-    shorter = comparison.size < @strand.size ? comparison : @strand 
+    shorter = comparison.size < @strand.size ? comparison : @strand
     number = 0
 
     shorter.length.times do |index|
       number += 1 if @strand[index] != comparison[index]
     end
-    
+
     number
   end
 end
-
-
-
