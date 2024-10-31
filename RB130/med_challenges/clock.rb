@@ -67,41 +67,56 @@ Algorithm:
       -Return a new Clock object representing the computed time
 =end
 
-class Clock 
-  attr_accessor :hours, :minutes
-  
-  def initialize(hours, minutes)
-    @hours = hours % 24
-    @minutes = minutes % 60
+class Clock
+  attr_reader :hour, :minute
+
+  ONE_DAY = 24 * 60
+
+  def initialize(hour, minute)
+    @hour = hour
+    @minute = minute
   end
 
-  def self.at(hours, minutes = 0)
-    new_clock = Clock.new(hours, minutes)
-    new_clock
+  def self.at(hour, minute=0)
+    new(hour, minute)
   end
 
-  def +(minutes)
-    
+  def +(add_minutes)
+    minutes_since_midnight = compute_minutes_since_midnight + add_minutes
+    while minutes_since_midnight >= ONE_DAY
+      minutes_since_midnight -= ONE_DAY
+    end
+
+    compute_time_from(minutes_since_midnight)
   end
 
-  def -(minutes)
-    
+  def -(sub_minutes)
+    minutes_since_midnight = compute_minutes_since_midnight - sub_minutes
+    while minutes_since_midnight < 0
+      minutes_since_midnight += ONE_DAY
+    end
+
+    compute_time_from(minutes_since_midnight)
   end
 
-  def ==(other)
-    
+  def ==(other_time)
+    hour == other_time.hour && minute == other_time.minute
   end
 
-  def to_s 
-    format('%02d:%02d', @hour, @minute) 
+  def to_s
+    format('%02d:%02d', hour, minute);
   end
 
-  def minutes_since_midnight
-    60 * @hours + @minutes
+  private
+
+  def compute_minutes_since_midnight
+    total_minutes = 60 * hour + minute
+    total_minutes % ONE_DAY
   end
 
-  def time_from_minutes_since_midnight
-    
+  def compute_time_from(minutes_since_midnight)
+    hours, minutes = minutes_since_midnight.divmod(60)
+    hours %= 24
+    self.class.new(hours, minutes)
   end
-
 end
