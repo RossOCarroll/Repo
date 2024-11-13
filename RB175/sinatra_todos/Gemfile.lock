@@ -6,9 +6,6 @@ GEM
     multi_json (1.15.0)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    nio4r (2.7.4)
-    puma (6.4.3)
-      nio4r (~> 2.0)
     rack (3.1.8)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
@@ -29,17 +26,17 @@ GEM
       sinatra (= 4.0.0)
       tilt (~> 2.0)
     tilt (2.4.0)
+    webrick (1.9.0)
 
 PLATFORMS
   ruby
   x86_64-darwin-22
-  x86_64-linux
 
 DEPENDENCIES
   erubis
-  puma
   sinatra
   sinatra-contrib
+  webrick
 
 RUBY VERSION
    ruby 3.2.2p53
