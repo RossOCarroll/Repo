@@ -4,6 +4,7 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     erubis (2.7.0)
+    fileutils (1.7.3)
     logger (1.6.1)
     minitest (5.25.1)
     multi_json (1.15.0)
@@ -45,6 +46,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   erubis
+  fileutils
   minitest
   puma
   rack-test

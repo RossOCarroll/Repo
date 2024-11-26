@@ -117,7 +117,7 @@ class CMSTest < Minitest::Test
   def test_create_new_document_without_filename
     post "/create", filename: ""
     assert_equal 422, last_response.status
-    #assert_includes last_response.body, "A name is required"
+    assert_includes last_response.body, "A name is required"
   end
 
   def test_deleting_document
@@ -259,5 +259,60 @@ class CMSTest < Minitest::Test
     post "/test.txt/delete"
     assert_equal 302, last_response.status
     assert_equal "You must be signed in to do that.", session[:message]
+  end
+
+  def test_duplicate_document 
+    create_document("test.txt")
+
+    post "/test.txt/duplicate", {}, admin_session
+
+    assert_equal 302, last_response.status 
+    assert_equal "test.txt has been duplicated.", session[:message]
+
+    duplicate_path = File.join(data_path, "copy_of_test.txt")
+    assert File.exist?(duplicate_path)
+  end
+
+  def test_valid_file_extension 
+    post "/create", { filename: "valid_file.txt" }, admin_session
+
+    assert_equal 302, last_response.status
+    assert_equal "valid_file.txt has been created.", session[:message]
+    assert File.exist?(File.join(data_path, "valid_file.txt"))
+
+    post "/create", { filename: "valid_file.md" }, admin_session
+
+    assert_equal 302, last_response.status
+    assert_equal "valid_file.md has been created.", session[:message]
+    assert File.exist?(File.join(data_path, "valid_file.md"))
+  end
+
+  def test_invalid_file_extension 
+    post "/create", { filename: "invalid_file.exe" }, admin_session
+
+    assert_equal 422, last_response.status
+    #assert_includes last_response.body, "File must be a text or markdown file."
+    refute File.exist?(File.join(data_path, "invalid_file.jpg"))
+  end
+
+  def test_for_user_signup
+    post "/users/signup", { username: "new_user", password: "password123" }
+
+    assert_equal 302, last_response.status
+    follow_redirect!
+    assert_equal "User has been created please sign in.", session[:message]
+  end
+
+  def test_for_invalid_user_signup 
+    post "/users/signup", { username: "", password: "password123" }
+
+    assert_equal 422, last_response.status 
+    assert_includes "Username and password must not be empty.", session[:message]
+
+    post "/users/signup", { username: "user_name", password: "" }
+
+    assert_equal 422, last_response.status 
+    assert_includes "Username and password must not be empty.", session[:message]
+
   end
 end

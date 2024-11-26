@@ -1,9 +1,9 @@
 <html>
   <title>CMS</title>
-  <link href="/cms.css" rel="stylesheet" type="text/css" />
+  <link href="/cms.css" rel="stylesheet" type="text/css"/>
   <body>
-    <% if @message %>
-      <p class="message"><%= @message %></p>
+    <% if session[:message] %>
+      <p class="message"><%= session[:message] %></p>
     <% end %>
     <%= yield %>
   </body>

@@ -5,11 +5,18 @@ require "redcarpet"
 require 'securerandom'
 require "yaml"
 require "bcrypt"
+require "fileutils"
+
+set :static, true
+set :public_folder, File.dirname(__FILE__) + '/public'
+
 
 configure do
   enable :sessions
   secret = SecureRandom.hex(32)
   set :session_secret, secret
+
+  set :public_folder, File.expand_path('../data', __FILE__)
 end
 
 def data_path
@@ -56,6 +63,11 @@ def valid_credentials?(username, password)
   end
 end
 
+def valid_file_extension?(file_name)
+  ext_name = File.extname(file_name)
+  [".txt", ".md"].include?(ext_name)
+end
+
 def user_signed_in?
   session.key?(:username)
 end
@@ -69,9 +81,6 @@ end
 
 get "/" do
   pattern = File.join(data_path, "*")
-  @message = session[:message]
-
-  session[:message] = nil
 
   @files = Dir.glob(pattern).map do |path|
     File.basename(path)
@@ -107,20 +116,15 @@ end
 
 post "/create" do
   guest_user_redirect
+
   filename = params[:filename].to_s
 
-  if filename.size == 0
-    session[:message] = "A name is required."
-    status 422
-    erb :new
-  else
-    file_path = File.join(data_path, filename)
+  file_path = File.join(data_path, filename)
 
-    File.write(file_path, "")
-    session[:message] = "#{params[:filename]} has been created."
+  File.write(file_path, '')
+  session[:message] = "#{params[:filename]} has been created."
 
-    redirect "/"
-  end
+  redirect "/"
 end
 
 post "/:filename/delete" do 
@@ -132,6 +136,17 @@ post "/:filename/delete" do
 
   redirect "/"
 
+end
+
+post "/:filename/duplicate" do 
+  guest_user_redirect 
+  file_path = File.join(data_path, params[:filename])
+  duplicate_path = File.join(data_path, "copy_of_#{params[:filename]}")
+
+  FileUtils.cp(file_path, duplicate_path)
+  session[:message] = "#{params[:filename]} has been duplicated."
+
+  redirect "/"
 end
 
 post "/:filename" do
@@ -167,3 +182,40 @@ post "/users/signout" do
   session[:message] = "You have been signed out."
   redirect "/"
 end
+
+get "/users/signup" do 
+  erb :signup, layout: :layout
+end
+
+post "/users/signup" do 
+  username = params[:username].strip
+  password = params[:password]
+
+  if username.empty? || password.empty? 
+    session[:message] = "Username and password must not be empty."
+    status 422
+    erb :signup
+  elsif load_user_credentials.key?(username)
+    session[:message] = "This user already exists."
+    status 422
+    erb :signup 
+  else 
+    credentials = load_user_credentials 
+    credentials[username] = BCrypt::Password.create(password).to_s
+
+    File.write(File.expand_path("../users.yml", __FILE__), credentials.to_yaml)
+
+    session[:message] = "User has been created please sign in."
+    redirect "/users/signin"
+  end
+
+end
+
+# get "/upload_image" do 
+#   erb :upload_image
+# end
+
+# post "/upload_image" do 
+  
+# end
+
