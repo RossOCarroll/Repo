@@ -7,9 +7,7 @@ require "yaml"
 require "bcrypt"
 require "fileutils"
 
-set :static, true
-set :public_folder, File.dirname(__FILE__) + '/public'
-
+set :public_folder, File.expand_path('../public', __FILE__)
 
 configure do
   enable :sessions
@@ -90,7 +88,7 @@ end
 
 get "/new" do
   guest_user_redirect
-  erb :new
+  erb :new, layout: :layout
 end
 
 get "/:filename" do
@@ -111,7 +109,7 @@ get "/:filename/edit" do
   @filename = params[:filename]
   @content = File.read(file_path)
 
-  erb :edit
+  erb :edit, layout: :layout
 end
 
 post "/create" do
@@ -160,7 +158,7 @@ post "/:filename" do
 end
 
 get "/users/signin" do 
-  erb :signin 
+  erb :signin, layout: :layout
 end
 
 post "/users/signin" do
@@ -173,7 +171,7 @@ post "/users/signin" do
   else
     session[:message] = "Invalid credentials"
     status 422
-    erb :signin
+    erb :signin, layout: :layout
   end
 end
 
@@ -194,11 +192,11 @@ post "/users/signup" do
   if username.empty? || password.empty? 
     session[:message] = "Username and password must not be empty."
     status 422
-    erb :signup
+    erb :signup, layout: :layout
   elsif load_user_credentials.key?(username)
     session[:message] = "This user already exists."
     status 422
-    erb :signup 
+    erb :signup , layout: :layout
   else 
     credentials = load_user_credentials 
     credentials[username] = BCrypt::Password.create(password).to_s
