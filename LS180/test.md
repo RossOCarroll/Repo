@@ -103,3 +103,94 @@ VALUES (1, 3),
 (3, 9),
 (4, 1),
 (4, 5);
+
+
+
+SELECT reviews.book_id, reviews.content, reviews.rating, reviews.published_date,
+        books.id, books.title, books.author
+        FROM reviews
+        RIGHT JOIN books
+          ON reviews.book_id = books.id;
+      
+SELECT users.full_name, books.title, 
+        checkouts.checkout_date
+        FROM users 
+        INNER JOIN checkouts
+          ON users.id = checkouts.user_id
+        INNER JOIN books 
+          ON books.id = checkouts.book_id;
+
+
+SELECT u.full_name, b.title, c.checkout_date
+  FROM users AS u
+  INNER JOIN checkouts AS c
+    ON u.id = c.user_id
+  INNER JOIN books AS b
+    ON b.id = c.book_id;
+
+SELECT u.full_name FROM users u
+  WHERE u.id NOT IN (
+    SELECT c.user_id FROM checkouts c
+  );
+
+SELECT u.full_name
+  FROM users u
+  LEFT JOIN checkouts c ON u.id = c.user_id
+  WHERE c.user_id IS NULL;
+
+SELECT countries.name, continents.continent_name
+    FROM countries
+    JOIN continents
+    ON countries.continent_id = continents.id;
+
+SELECT countries.name, countries.capital
+  FROM countries
+  JOIN continents
+  ON countries.continent_id = continents.id
+  WHERE continents.continent_name = 'Europe';
+
+SELECT singers.first_name
+  FROM singers JOIN albums
+  ON singers.id = albums.singer_id 
+  WHERE albums.label = 'Warner Bros';
+
+SELECT singers.first_name, singers.last_name, albums.album_name, albums.released
+  FROM singers JOIN albums
+  ON singers.id = albums.singer_id 
+  WHERE EXTRACT(YEAR FROM albums.released) BETWEEN 1980 AND 1989
+  AND singers.deceased = false
+  ORDER BY singers.date_of_birth DESC;
+
+SELECT singers.first_name, singers.last_name
+  FROM singers LEFT JOIN albums
+  ON singers.id = albums.singer_id
+  WHERE albums.id is NULL OR albums.album_name = '';
+
+SELECT singers.first_name, singers.last_name
+  FROM singers
+  WHERE singers.id NOT IN (
+    SELECT albums.singers_id FROM albums
+  );
+
+SELECT orders.*, products.*
+  FROM orders JOIN order_items
+  ON orders.id = order_items.order_id
+  JOIN products
+  ON order_items.product_id = products.id;
+
+SELECT orders.id
+  FROM orders JOIN order_items
+  ON orders.id = order_items.order_id
+  JOIN products
+  ON order_items.product_id = products.id
+  WHERE products.product_name = 'Fries';
+
+SELECT DISTINCT c.customer_name AS "Customers who like Fries"
+FROM customers AS c JOIN orders as o
+ON c.id = o.id
+JOIN order_items AS oi
+ON o.id = oi.order_id
+JOIN products AS p
+ON oi.product_id = p.id
+WHERE p.product_name = 'Fries';
+
