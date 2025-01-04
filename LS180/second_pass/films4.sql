@@ -136,3 +136,45 @@ ALTER TABLE ONLY films
 -- PostgreSQL database dump complete
 --
 
+INSERT INTO films (title, year, genre, director, duration)
+VALUES 
+  ('Wayne''s World', 1992, 'comedy', 'Penelope Spheeris', 95),
+  ('Bourne Identity', 2002, 'espionage', 'Doug Liman', 118);  -- Assuming duration is NULL
+
+
+SELECT DISTINCT genre FROM films;
+
+SELECT genre, count(id) FROM films
+GROUP BY genre;
+
+SELECT round(AVG(duration)) FROM films;
+
+SELECT genre, round(AVG(duration)) FROM films 
+GROUP BY genre
+ORDER BY genre;
+
+SELECT FLOOR(year / 10) * 10 AS decade,
+    round(AVG(duration)) AS avg_duration
+FROM films
+GROUP BY decade 
+ORDER BY decade ASC;
+
+SELECT * FROM films 
+WHERE director LIKE 'John%';
+
+SELECT genre, count(id) FROM films
+GROUP BY genre
+ORDER BY count(id) DESC;
+
+SELECT (year / 10) * 10 AS decade, genre, 
+string_agg(title, ', ') AS films
+FROM films
+GROUP BY decade, genre
+ORDER BY decade, genre;
+
+SELECT genre, sum(duration) AS total_duration
+FROM films 
+GROUP BY genre
+ORDER BY total_duration;
+
+    
