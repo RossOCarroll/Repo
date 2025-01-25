@@ -1,5 +1,5 @@
 CREATE TABLE employees (
-    employee_id serial PRIMARY KEY,
+    id serial PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     date_of_birth DATE,
@@ -51,8 +51,7 @@ VALUES
     (2, 62000.00),
     (3, 72000.00),
     (4, 58000.00),
-    (5, 47000.00),
-    (6, 63000.00);
+    (5, 47000.00);
 
 SELECT SUM(salary) FROM salaries
 JOIN employees ON salaries.employee_id = employees.id
