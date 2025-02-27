@@ -1,0 +1,29 @@
+<h1>Edit Expense</h1>
+
+<form action="/edit_expense" method="post">
+
+  <input type="hidden" name="original_name" value="<%= @expense[:name] %>">
+
+  <div>
+    <label for="name">Expense Name:</label>
+    <input type="text" name="name" id="name" value="<%= @expense[:name] %>">    
+  </div>
+
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="text" name="amount" id="amount" value="<%= format('%.2f', @expense[:amount]) %>">    
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <select name="category" id="category">
+      <% @categories.each do |cat| %>
+        <option value="<%= cat %>" <%= 'selected' if @expense[:category] == cat %>><%= cat.capitalize %></option>
+      <% end %>
+    </select>
+ 
+  </div>
+  <button type="submit">Edit expense</button>
+  <a href="/">Return</a>
+
+</form>

@@ -1,0 +1,29 @@
+<h1>Add a expense to your monthly budget:</h1>
+
+<form action="/add_expense" method="post">
+  <div>
+    <label for="name">Expense name:</label>
+    <input type="text" name="name" id="name">    
+  </div>
+
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="text" name="amount" id="amount">    
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+      <select name="category" id="category">
+        <option value="housing">Housing</option>
+        <option value="utilities">Utilities</option>
+        <option value="groceries">Groceries</option>
+        <option value="transportation">Transportation</option>
+        <option value="insurance">insurance</option>
+        <option value="other">Other</option>
+      </select>    
+  </div>
+
+
+<button type="submit">Add expense</button>
+
+</form>
