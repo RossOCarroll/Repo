@@ -1,0 +1,167 @@
+#! /usr/bin/env ruby
+
+require "pg"
+require "date"
+require "io/console"
+
+
+class ExpenseData
+  def initialize
+    @connection = PG.connect(dbname: "expense")
+    setup_schema 
+  end
+
+
+  def list_expenses
+    result = @connection.exec("SELECT * FROM expenses ORDER BY created_on ASC")
+    display_expenses(result)
+  end
+
+  def add_expense(amount, memo)
+    date = Date.today
+    sql = "INSERT INTO expenses (amount, memo, created_on) VALUES ($1, $2, $3)"
+    @connection.exec_params(sql, [amount, memo, date])
+  end
+
+  def search_expenses(query)
+    sql = "SELECT * FROM expenses WHERE memo ILIKE $1;"
+    result = @connection.exec_params(sql, ["%#{query}%"])
+    display_expenses(result)
+  end
+
+  def delete_expense(id)
+    fetch_sql = "SELECT * FROM expenses WHERE id = $1;"
+    result = @connection.exec_params(fetch_sql,[id])
+
+    if result.ntuples.zero?
+      puts "There is no expense with the id '#{id}'."
+      return
+    end
+
+    delete_sql = "DELETE FROM expenses WHERE id = $1;"
+    @connection.exec_params(delete_sql, [id])
+
+    puts "The following expense has been deleted:"
+    display_expenses(result)
+  end
+
+  def delete_all_expenses
+    puts "This will remove all expenses. Are you sure? (y/n)"
+    answer = STDIN.getch.downcase
+
+    if answer == 'y'
+      sql = "DELETE FROM expenses;"
+      @connection.exec(sql)
+      puts "All expenses have been deleted."
+    else 
+      list_expenses
+    end
+  end
+
+  private 
+
+  def calculate_total(expenses)
+    total = 0
+    expenses.each { |tuple| total += tuple["amount"].to_f }
+    total
+  end
+
+  def number_of_expenses(expenses)
+    expenses.ntuples
+  end
+
+  def display_expenses_table(expenses)
+    expenses.map do |tuple|
+      columns = [ tuple["id"].rjust(3),
+                  tuple["created_on"].rjust(10),
+                  tuple["amount"].rjust(12),
+                  tuple["memo"] ]
+
+      columns.join(" | ")
+    end.join("\n")
+  end
+
+  def display_expenses(expenses)
+    total = calculate_total(expenses)
+    number_of_expenses = number_of_expenses(expenses)
+
+    if number_of_expenses.zero?
+      puts "There are no expenses."
+    elsif number_of_expenses == 1
+      puts "There is #{number_of_expenses} expense."
+      puts display_expenses_table(expenses)
+
+      puts "--------------------------------------------------"
+      puts "Total                      #{'%.2f' % total}"  
+    else
+      puts "There are #{number_of_expenses} expenses."
+      puts display_expenses_table(expenses)
+
+      puts "--------------------------------------------------"
+      puts "Total                     #{'%.2f' % total}"          
+    end   
+  end
+
+  def setup_schema
+    result = @connection.exec <<~SQL
+      SELECT COUNT(*) FROM information_schema.tables
+      WHERE table_schema = 'public' AND table_name = 'expenses';
+    SQL
+
+    if result[0]["count"] == "0"
+      @connection.exec <<~SQL
+        CREATE TABLE expenses (
+          id serial PRIMARY KEY,
+          amount numeric(6,2) NOT NULL CHECK (amount >= 0.01),
+          memo text NOT NULL,
+          created_on date NOT NULL
+        );
+      SQL
+    end
+  end
+end
+
+class CLI
+  def initialize
+    @application = ExpenseData.new
+  end
+
+  def run(arguments)
+    command = arguments.shift
+    case command
+    when "add"
+      amount = arguments[0]
+      memo = arguments[1]
+      abort "You must provide an amount and memo" unless amount && memo 
+      @application.add_expense(amount, memo)
+    when "list"
+      @application.list_expenses
+    when 'search'
+      query = arguments[0]
+      @application.search_expenses(query)
+    when 'delete'
+      id = arguments[0]
+      @application.delete_expense(id)
+    when 'clear'
+      @application.delete_all_expenses
+    else
+      display_help
+    end
+  end
+
+  def display_help
+    puts <<~HELP
+      An expense recording system
+
+      Commands:
+
+      add AMOUNT MEMO - record a new expense
+      clear - delete all expenses
+      list - list all expenses
+      delete NUMBER - remove expense with id NUMBER
+      search QUERY - list expenses with a matching memo field
+    HELP
+  end  
+end
+
+CLI.new.run(ARGV)
