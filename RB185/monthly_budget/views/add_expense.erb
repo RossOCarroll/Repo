@@ -1,0 +1,29 @@
+<h1 class="text-center">Add an Expense to Your Monthly Budget</h1>
+
+<div class="container">
+  <form action="/add_expense" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">Expense Name:</label>
+      <input type="text" name="name" id="name" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount:</label>
+      <input type="text" name="amount" id="amount" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category:</label>
+      <select name="category" id="category" class="form-select">
+        <option value="Housing">Housing</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Transportation">Transportation</option>
+        <option value="Insurance">Insurance</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Add Expense</button>
+  </form>
+</div>

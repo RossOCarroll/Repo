@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Yearly Budget</h1>
+
+  <h2>Expenses</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Expense Name</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @yearly_expenses.each do |expense| %>      
+        <tr>
+          <td><%= expense[:name] %></td>
+          <td><%= format('%.2f', expense[:amount]) %></td>
+          <td><%= expense[:category] %></td>
+          <td><a href="/<%= expense[:name] %>/edit">Edit</a></td>
+          <td>
+            <form action="/<%= expense[:name] %>/delete" method="post" onsubmit="return confirmDelete()">
+              <button type="submit">Delete</button>
+            </form>     
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h3>Income: <%= format('%.2f', @yearly_income) %></h3>
+  <h3>Balance: <%= format('%.2f', @yearly_balance) %></h3>
+
+  <div style="text-align: center;">
+    <a href="/set_income">Set income</a>
+    <a href="/add_expense">Add expense</a>
+    <a href="/home">Calculate for the Month</a>
+    <a href="/logout">Log Out</a>
+  </div>
+</div>
+
+<script>
+  function confirmDelete() {
+    return confirm('Are you sure you want to delete this expense?');
+  }
+</script>

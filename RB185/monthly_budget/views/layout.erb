@@ -1,0 +1,16 @@
+<html>
+  <title>Monthly Budget</title>
+  <head>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <% if session[:message] %>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <%= session[:message] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% session[:message] = nil %> 
+    <% end %>
+  <%= yield %>
+  </body>
+</html>
