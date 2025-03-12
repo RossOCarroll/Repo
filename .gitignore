@@ -1,0 +1,18 @@
+.vscode/extensions.json
+RB185/170-sinatra-todos-final 2
+RB185/rental_manager_app/.gitignore
+RB185/rental_manager_app/database_persistence.rb
+RB185/rental_manager_app/Gemfile
+RB185/rental_manager_app/Gemfile.lock
+RB185/rental_manager_app/manager.rb
+RB185/rental_manager_app/schema.sql
+RB185/rental_manager_app/public/style.css
+RB185/rental_manager_app/views/add_property.erb
+RB185/rental_manager_app/views/add_tenant.erb
+RB185/rental_manager_app/views/edit_property.erb
+RB185/rental_manager_app/views/edit_tenant.erb
+RB185/rental_manager_app/views/home.erb
+RB185/rental_manager_app/views/layout.erb
+RB185/rental_manager_app/views/login.erb
+RB185/rental_manager_app/views/property.erb
+RB185/rental_manager_app/views/signup.erb
