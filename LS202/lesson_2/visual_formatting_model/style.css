@@ -1,0 +1,24 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+
+div {
+  background-color: #c0ffc0;
+  border: 1px solid green;
+  padding: 40px;
+}
+
+p {
+  background-color: white;
+  border: 1px solid blue;
+  display: inline-block;
+  margin: 0 2%;
+  padding: 15px;
+  vertical-align: bottom;
+  width: 40%;
+}

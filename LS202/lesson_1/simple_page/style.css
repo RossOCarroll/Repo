@@ -1,0 +1,27 @@
+body {
+  margin-left: 25px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.afternoon-title {
+  color: blue;
+}
+
+.evening-title {
+  color: purple;
+}
+
+.mourning-text {
+  font-weight: bold;
+}
+
+.afternoon-text {
+  font-style: italic;
+}
+
+ul {
+  list-style: none;
+}
