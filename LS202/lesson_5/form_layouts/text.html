@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Layouts</title>
+</head>
+<body>
+  <form action="" method="post">
+    <dl>
+      <dt><label for="name">Your name</label></dt>
+      <dd><input type="text" name="name" id="name" /></dd>
+    </dl>
+
+    <dl>
+      <dt><label for="address1">Address</label></dt>
+      <dd>
+        <input type="text" name="address1" id="address1" />
+        <input type="text" name="address2" id="address2" />
+      </dd>
+    </dl>
+
+    <div class="partial-row">
+      <dl class="partial city">
+        <dt><label for="city">City</label></dt>
+        <dd><input type="text" name="city" id="city" /></dd>
+      </dl>
+
+      <dl class="partial state">
+        <dt><label for="state">State</label></dt>
+        <dd>
+          <select name="state" id="state">
+            <option value="AK">AK</option>
+            <option value="AL">AL</option>
+          </select>
+        </dd>
+      </dl>
+
+      <dl class="partial zipcode">
+        <dt><label for="zipcode">Zip Code</label></dt>
+        <dd><input type="text" name="zipcode" id="zipcode" /></dd>
+      </dl>
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+fieldset {
+  width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+}
+
+dt {
+  margin-bottom: 5px;
+}
+
+dd {
+  margin: 0 0 25px;
+}
+
+[type="text"],
+[type="email"],
+[type="number"] {
+  height: 30px;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+textarea {
+  width: 100%;
+  padding-bottom: 0;
+}
+
+[type="submit"],
+[type="reset"] {
+  margin-top: 0;
+}
+
+.same-line-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.same-line {
+  width: 49%;
+  box-sizing: border-box;
+}
+
+.partial-half {
+  width: 50%;
+}
+
+.partial-10 {
+  width: 10%;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 10px;
+}
+
+.partial-40 {
+  width: 40%;
+}
+
+dl {
+  margin-bottom: 0;
+}
+
+
