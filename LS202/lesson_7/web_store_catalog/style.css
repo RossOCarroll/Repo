@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #ffd505;
+}
+
+header, main {
+  width: 900px;
+  margin: 0 auto 30px;  
+}
+
+header {
+  background-color: #047ec1;
+  border-radius: 0 0 16px 16px;
+}
+
+h1 {
+  padding: 35px 0 35px 25px;
+  color: white;
+  font-size: 2.4em;
+}
+
+main {
+  background-color: #ececec;
+  box-sizing: border-box;
+  padding: 25px;
+}
+
+main:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+h2 {
+  color: black;
+  font-size: 2em;
+  padding: 0 0 25px 0;
+}
+
+li {
+  float: left;
+  width: 23.5%;
+  margin: 0 0 2% 2%;
+  background-color: white;
+  padding: 15px;
+  box-sizing: border-box;
+  height: 215px;
+}
+
+li:nth-of-type(4n+1) {
+  margin-left: 0;
+}
+
+h3 {
+  padding: 0 0 5px 0;
+  font-size: 1.2rem;
+}
+
+figure {
+  width: 100%;
+  height: 160px;
+}
+
+img {
+  width: auto;
+  height: 140px;
+  display: block;
+  margin: 0 auto;
+}
+
+input[type="checkbox"] { display: none; }
+input:checked + figure img {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  z-index: 2;
+  width: 400px;
+  height: auto;
+  margin: 0 0 0 -200px;
+}
+
+input:checked + figure:before {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  content: "";
+  background: rgba(0, 0, 0, .4);
+}

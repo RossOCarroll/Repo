@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+p {
+  line-height: 30px;
+}
+
+div.container {
+  margin: 0 auto;
+  border: 2px solid gray;
+  padding: 20px 20px 30px 25px;
+  width: 1000px;
+
+}
+
+h1, h2, h3 {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+}
+
+div.dotted-box {
+  border: 1px black dashed;
+  padding: 25px;
+  margin: 40px 250px 40px 30px;
+  text-decoration: none;
+  color: black;
+  overflow: hidden;
+}
+
+.inline-anchor {
+  margin: 30px 30px 30px 30px;
+  text-decoration: none;
+  color: black;
+}
+
+.inline-padding {
+  padding: 25px 25px 25px 25px;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+}
+
+.inline-float {
+  padding: 25px 25px 25px 25px;
+  margin: 20px;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+  border: 1px solid darkgreen;
+  float: left;
+}
+
+.no-height-width {
+  background-color: royalblue;
+  color: white;
+}
+
+.no-width-but-height {
+  background-color: green;
+  padding: 20px;
+  margin: 20px;
+  height: 60px;
+  color: white;
+}
+
+.width-90 {
+  color: white;
+  width: 90px;
+  background-color: orange;
+}
+
+.width-180 {
+  width: 180px;
+  height: 120px;
+  color: white;
+  padding: 20px;
+  margin: 20px;
+  background-color: pink;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.fl-1 {
+  float: left;
+  color: white;
+  background-color: dodgerblue;
+  border: 1px solid red;
+}
+
+.fl-2 {
+  float: right;
+  color: white;
+  background-color: coral;
+  border: 1px solid red;
+}
+
+.fl-w-h-l {
+  float: left;
+  color: white;
+  background-color: coral;
+  width: 40%;
+  height: 70px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;  /* horizontal centering */
+  align-items: center;
+}
+
+.fl-w-h-r {
+  float: right;
+  color: white;
+  background-color: dodgerblue;
+  width: 50%;
+  height: 70px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;  /* horizontal centering */
+  align-items: center;
+}
+
+.inline-block {
+  display: block;
+  background-color: dodgerblue;
+  margin: 0.6rem 0 0.6rem 0;
+  color: white;
+  padding: 0.7rem;
+  text-align: center;
+}
+
+.nav-bar {
+  text-align: center;
+}
+
+.nav-items {
+  display: inline-block;
+  background-color: dodgerblue;
+  margin: .6rem;
+  padding: 1.1rem 3.2rem;
+  color: white;
+  align-items: center;
+}
+
+.dashed-line {
+  border: 2px dashed black;
+}
+
+.fl-pos {
+  position: relative;
+  text-align: center;
+}
+
+.top-right {
+  float: left;
+  width: 45%;
+  height: 6rem;
+  background-color: coral;
+  color: white;
+  text-align: center;
+  line-height: 6rem;
+}
+
+.top-left {
+  float: right;
+  width: 55%;
+  height: 6rem;
+  color: white;
+  background-color: dodgerblue;
+  text-align: center;
+  line-height: 6rem;
+}
+
+.fl-bottom {
+  clear: both;
+  width: 100%;
+  background-color: green;
+  height: 2.3rem;
+  color: white;
+  text-align: center;
+  line-height: 2.3rem;
+}
+
+.clearfix {
+  width: 160px;
+
+}
+
+ul {
+  font-style: italic;
+  margin: 20px 55px;
+}
+
+li {
+  margin: 8px;
+}
+
+.fixed-square {
+  height: 5rem;
+  width: 275px;
+  background-color: dodgerblue;
+  position: fixed;
+  opacity: 90%;
+  bottom: 35px;
+  left: 35px;
+  border-radius: 10px;
+}
+
+.fixed-square-inner {
+  line-height: 5rem;
+  text-align: center;
+  color: white;
+}
+
+.rel-pos {
+  height: 4rem;
+  width: 350px;
+  border-radius: 10px;
+  background-color: tomato;
+  position: relative;
+  color: white;
+  bottom: 0px;
+  left: -100px;
+  padding: 25px 35px;
+  text-align: center;
+}
+
+.abs-pos {
+  height: 5rem;
+  width: 250px;
+  position: relative;
+  background-color: green;
+  border-radius: 10px;
+  left: 200px;
+  bottom: 200px;
+  color: white;
+  padding: 23px 35px;
+  text-align: center;
+}
+

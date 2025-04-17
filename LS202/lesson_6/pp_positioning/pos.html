@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.3rem;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+      }
+      section {
+        border: 8px solid #cecece;
+      }
+
+      #positioned {
+        background-color: #ffc;
+        padding: 30px 15px;
+        position: fixed;
+        top: 0;
+        left: 33%;
+        width: 400px;
+        z-index: 2;
+      }
+
+      #fixed {
+        background-color: rgba(0, 0, 0, .6);
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1; /* 1 must be < 2 */
+      }
+
+      #positioned span {
+        background-color: pink;
+        height: 20px;
+        left: -10px;
+        position: absolute;
+        top: -10px;
+        width: 20px;
+      }
+
+  </style>
+</head>
+<body>
+  <section>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt mi ut dictum ultricies. In hac habitasse platea dictumst. Aliquam venenatis sem a eros imperdiet, sit amet finibus nibh finibus. Sed ut lacus nec magna suscipit pharetra id eu est. Nunc id auctor nibh. Aliquam consectetur fringilla justo ut fringilla. Nam eget tempor mauris. Morbi sed pulvinar velit. Suspendisse potenti. Etiam pretium massa in blandit euismod. Nunc eu semper dolor. Aliquam rutrum facilisis nisl. Morbi mattis dui eget massa venenatis mollis.
+    </p>
+    <p>
+      Ut pellentesque nisl in enim mattis scelerisque. Sed ut felis augue. Vestibulum varius, urna nec pellentesque pulvinar, mauris dolor volutpat diam, eleifend gravida dolor odio at nunc. Curabitur porta nec leo vel iaculis. Duis eget turpis gravida, lobortis risus id, auctor lorem. Vestibulum ac est in odio interdum ultrices. Quisque suscipit velit ut mauris hendrerit rutrum. Cras porta dictum lacus sed rhoncus.
+    </p>
+    <p>
+      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec dapibus, nulla ut egestas gravida, nisi dolor feugiat tortor, nec placerat lacus est in odio. Mauris et interdum ante. Nam nisl felis, dignissim id nisl non, elementum semper urna. Ut tempor finibus pulvinar. Vestibulum eget porta orci. Vestibulum bibendum hendrerit nisi id congue. Duis eget lorem nec est commodo venenatis et eget quam.
+    </p>
+    <p>
+      Aenean blandit augue felis, vitae condimentum massa vehicula eu. Nulla eget finibus enim. Pellentesque posuere blandit nisi, sed lobortis arcu molestie non. Nunc ac diam non erat mattis posuere. Ut ut lacus aliquet, laoreet lectus sit amet, cursus tortor. Vivamus ultricies non mi nec iaculis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+    </p>
+    <p>
+      Pellentesque euismod pharetra massa, aliquam hendrerit risus eleifend pharetra. Suspendisse id rutrum nisl. Praesent ac urna euismod tellus egestas sagittis quis in risus. Morbi eget pulvinar massa. Sed at blandit nisi. Nunc consectetur ante vel commodo volutpat. Nunc elementum venenatis condimentum. Phasellus nulla purus, mattis ac nibh nec, commodo fermentum risus. Phasellus et faucibus arcu, sed imperdiet ligula. Aliquam erat volutpat. In molestie erat vel auctor fermentum. In non velit nec ex fermentum volutpat tempus nec sem.
+    </p>
+    <p>
+      Curabitur elementum mauris blandit turpis dapibus eleifend. Donec sed metus id sem euismod molestie. Aenean a mauris leo. Duis viverra, lorem imperdiet dictum volutpat, ante turpis consectetur purus, non ullamcorper diam sapien a tortor. In libero eros, dignissim et erat vitae, hendrerit sodales neque. Nam nunc felis, tincidunt sed purus et, congue tempus velit. Nulla sed sem nibh. Nam fringilla, sapien eu luctus interdum, ligula turpis porttitor tortor, eget aliquam arcu neque nec nibh. Mauris non magna diam. Donec posuere semper libero, nec tristique purus accumsan eu.
+    </p>
+    <p>
+      Suspendisse eget venenatis ante, faucibus consectetur ligula. Nam dignissim quam ac odio dapibus, in accumsan elit vehicula. Quisque congue sollicitudin purus ac blandit. Vestibulum laoreet venenatis elit, mollis efficitur odio dictum non. In cursus lacus vel convallis hendrerit. Donec euismod dapibus justo id feugiat. Cras accumsan posuere lacus a finibus. Mauris laoreet consequat eleifend. Etiam in orci volutpat, scelerisque purus vel, dignissim nulla. Proin viverra urna id auctor congue.
+    </p>
+
+  </section>
+
+  <div id="positioned">
+    <span></span>
+    I'm positioned!
+  </div>
+
+  <div id="fixed"></div>
+ 
+</body>
+</html>
