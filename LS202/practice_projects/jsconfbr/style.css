@@ -1,0 +1,381 @@
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#menu {
+  border-top: 10px solid #f5f5f5;
+  width: 100%;
+  text-align: center; 
+  border-bottom: 1px solid lightgray;
+  background-color: white;
+  z-index: 1;
+  position: fixed;
+}
+
+#menu ul {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+#menu li {
+  display: inline-block;
+  padding-right: 38px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#menu a {
+  text-decoration: none;
+  color: #444;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+#front {
+  background-image: url(images/front.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  padding-top: 75px;
+  text-align: center;
+  clear: both;
+}
+
+#front img {
+  margin: 0 auto;
+  padding-top: 75px;
+}
+
+#front h1 {
+  color: white;
+  font-size: 4.4rem;
+  font-weight: 100;
+  padding-top: 15px;
+}
+
+#front h2 {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: normal;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  text-transform: uppercase;
+}
+
+section {
+  margin: 0 auto;
+  text-align: center; 
+}
+
+.tickets {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 70px;
+  width: 1570px;
+}
+
+.tickets h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+}
+
+.tickets p {
+  font-size: 16px;
+  font-weight: 100;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.tickets a {
+  margin-top: 10px;
+  padding: 10px 25px;
+  color: white;
+  background-color: green;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tickets a:hover {
+  background-color: darkgreen;
+}
+
+.speakers {
+  border-bottom: 1px solid lightgray;
+}
+
+.speakers h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+  padding-bottom: 40px;
+}
+
+.speakers-container {
+  max-width: 1080px;
+  padding-bottom: 65px;
+  margin: 0 auto;
+}
+
+.speaker-block {
+  display: inline-block;
+  position: relative;
+  width: 280px;
+  height: 378px;
+  border: 1px solid lightgray;
+  margin: 5px 5px;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.speaker-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.speaker-block:hover .speaker-hover {
+  opacity: 1;
+}
+
+.speaker-block img {
+  height: 230px;
+  width: 279px;
+}
+
+.speaker-block h2 {
+  color: green;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 30px 0 4px;
+}
+
+.speaker-block p {
+  font-size: 16px;
+  padding-top: 5px;
+  font-weight: 300;
+}
+
+section.schedule {
+  border: 1px solid lightgray;
+  padding-bottom: 60px;
+}
+
+.schedule h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+  padding-bottom: 49px;
+}
+
+.table-grid {
+  margin: 0 auto;
+  font-size: 26px;
+  text-align: left;
+  width: 950px;
+}
+
+.table-grid tr {
+  border-top: 1px solid lightgray;
+}
+
+.table-grid td {
+  border-top: 1px solid lightgray;
+  padding: 10px 0 10px 35px;
+}
+
+.table-grid h2 {
+  font-size: 20px;
+  color: green;
+  padding-top: 10px;
+}
+
+.schedule-photo img {
+  width: 130px;
+  height: 110px;
+}
+
+.location {
+  margin: 0 auto;
+  font-size: 16px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 50px;
+}
+
+.location h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+}
+
+.address {
+  padding-top: 50px;
+  width: 950px;
+  text-align: left;
+  margin: 0 auto;
+  padding-bottom: 35px;
+}
+
+.address p {
+  padding-top: 5px;
+}
+
+.location img {
+  width: 2050px;
+  height: 500px;
+}
+
+.papers-section {
+  border-bottom: 1px solid lightgray;  
+}
+
+.papers {
+  margin: 0 auto;
+  font-size: 16px;
+  padding-bottom: 50px;
+  width: 950px;
+  text-align: left;
+}
+
+.papers h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.papers a {
+  text-decoration: none;
+  color: green;
+  font-weight: 600;
+}
+
+.papers a:hover {
+  text-decoration: underline;
+}
+
+a.button {
+  padding: 10px 25px;
+  color: white;
+  background-color: green;
+  text-decoration: none;
+}
+
+a.button:hover {
+  text-decoration: none;
+  background-color: darkgreen;
+}
+
+.sponsors {
+  margin: 0 auto;
+  font-size: 16px;
+  padding-bottom: 50px;
+  width: 950px;
+  border-bottom: 1px solid lightgray; 
+}
+
+.sponsors h1 {
+  font-size: 48px;
+  font-weight: 100;
+  padding-top: 75px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.sponsors dt {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.sponsors dl {
+  text-align: left;
+}
+
+.sponsors dl img {
+  max-width: 300px;
+  height: auto;
+}
+
+dd.support img {
+  max-width: 200px;
+  height: auto;
+}
+
+footer {
+  height: 340px;
+  color: white;
+  background-image: url(images/people.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+footer h1 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 100;
+  padding-top: 35px;
+  padding-bottom: 30px;
+}
+
+.team-container {
+  height: 185px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.team {
+  width: 950px;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.team h1 {
+  text-align: left;
+  font-size: 34px;
+  padding-top: 15px;
+  color: white;
+  padding-bottom: 0px;
+}
+
+.team p {
+  color: white;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.team a {
+  text-decoration: none;
+  color: green;
+  font-weight: 600;
+}
+
+.team a:hover {
+  text-decoration: underline;
+}
+
+div a.button {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}

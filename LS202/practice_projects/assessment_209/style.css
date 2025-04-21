@@ -1,0 +1,309 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: white;
+}
+
+nav {
+  float: left;
+  width: 335px;
+  background-color: #464f77; 
+  color: white;
+  padding: 70px 0px 0 0px;  
+  margin: 0 0 auto 0;
+  height: 100vh;
+  transition: transform 0.3s ease;
+}
+
+nav h1 {
+  font-size: 18px;
+  font-weight: 100;
+  margin-left: 10px;
+  padding-top: 3px;
+}
+
+.all-todos {
+  padding-bottom: 50px;
+}
+
+.header-row {
+  display: flex;
+  padding-left: 100px;
+}
+
+#top-row {
+  margin-left: 70px;
+  padding-top: 5px;
+}
+
+nav ul {
+  padding: 10px 0 0 0px;
+}
+
+nav li {
+  padding: 13px 0 13px 135px;
+}
+
+.date {
+  padding-right: 105px;
+  color: #a2a7bb;
+}
+
+.bubble {
+  background-color: #6b7292;
+  color: white;
+  text-align: center;
+  padding: 3px 6px;
+  font-size: 14px;
+  border-radius: 999px;
+}
+
+
+.date-active {
+  color: white;
+  padding-right: 105px;
+}
+
+.bubble-active {
+  color: white;
+  background-color: #138fd5;
+  color: white;
+  text-align: center;
+  padding: 3px 6px;
+  font-size: 14px;
+  border-radius: 999px;
+}
+
+.active-row {
+  background-color: #373f5f;
+  width: 335px;
+  margin-left: 0;
+}
+
+.completed-header {
+  display: flex;
+  padding-left: 100px; 
+}
+
+.completed h1 {
+  font-weight: 100;
+}
+
+.completed li {
+  text-decoration: line-through;
+  color: #a2a7bb;
+}
+
+main {
+  padding-left: 335px;
+  padding-top: 23px;
+  position: relative;
+}
+
+main header {
+
+}
+
+main img {
+  margin-left: 32px;
+  height: 20px;
+  width: 25px;
+}
+
+main h1 {
+  margin-left: 32px;
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+main div {
+  display: flex;
+}
+
+main div span {
+  margin-left: 20px;
+  margin-top: 25px;
+}
+
+main h2 {
+  display: flex;
+  padding: 18px 0 18px 0;
+  border-bottom: #a2a7bb solid 1px;
+  font-size: 18px;
+  color: #138fd5;
+  font-weight: 100;
+  margin-top: 27px;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+
+main h2:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+h2 img {
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+main ul {
+  padding-left: 20px;
+  padding-top: 0;
+  padding-right: 50px;
+}
+
+main li {
+  display: flex;
+  padding: 18px 0 18px 0px;
+  border-bottom: #a2a7bb solid 1px;
+  justify-content: space-between;
+}
+
+main li:hover {
+  background-color: aliceblue;
+  color: #138fd5;
+  cursor: pointer;
+}
+
+.left img {
+  width: 15px;
+  height: 15px;
+}
+
+main li span {
+  margin: 0;
+
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.right {
+  width: 18px;
+  height: 18px;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: #a2a7bb;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.hamburger-icon {
+  cursor: pointer;
+  visibility: hidden; 
+}
+
+.modal-toggle {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.modal-toggle:checked ~ .modal {
+  display: block;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 90%;
+  width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.modal-open-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-inputs input {
+  flex: 1;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.close-modal-btn {
+  background: #148fd5;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+
+@media (max-width: 768px) {
+  .hamburger-icon {
+    visibility: visible;
+    display: block; 
+  }
+
+  nav {
+    display: none; 
+  }
+
+  main {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 769px) {
+  .hamburger-icon {
+    visibility: hidden;
+  }
+
+  nav {
+    display: block; 
+  }
+}

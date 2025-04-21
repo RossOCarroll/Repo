@@ -1,0 +1,325 @@
+/* Root variables for reusability */
+:root {
+  --font-main: Arial, Helvetica, sans-serif;
+  --font-color: #444;
+  --highlight-color: green;
+  --hover-color: darkgreen;
+  --border-light: 1px solid lightgray;
+  --padding-section: 75px;
+  --max-width-container: 950px;
+  --heading-large: 48px;
+  --heading-medium: 34px;
+  --heading-small: 22px;
+  --font-regular: 16px;
+  --font-light: 100;
+  --font-weight-bold: 600;
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+}
+
+body {
+  background-color: white;
+  font-family: var(--font-main);
+  font-size: 13px;
+  color: var(--font-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#menu {
+  border-top: 10px solid #f5f5f5;
+  border-bottom: var(--border-light);
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  z-index: 1;
+}
+
+#menu ul {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+#menu li {
+  display: inline-block;
+  padding: 15px 38px 15px 0;
+}
+
+#menu a {
+  text-decoration: none;
+  color: var(--font-color);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+#front {
+  background: url(images/front.jpg) center top no-repeat;
+  padding-top: var(--padding-section);
+  text-align: center;
+  clear: both;
+}
+
+#front img {
+  margin: 0 auto;
+  padding-top: var(--padding-section);
+}
+
+#front h1 {
+  color: white;
+  font-size: 4.4rem;
+  font-weight: var(--font-light);
+  padding-top: 15px;
+}
+
+#front h2 {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: normal;
+  padding: 10px 0 60px;
+  text-transform: uppercase;
+}
+
+section {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tickets, .speakers, .papers-section, .location, .sponsors {
+  border-bottom: var(--border-light);
+}
+
+.tickets {
+  padding-bottom: 70px;
+  width: 1570px;
+}
+
+.tickets h1,
+.speakers h1,
+.schedule h1,
+.location h1,
+.papers h1,
+.sponsors h1 {
+  font-size: var(--heading-large);
+  font-weight: var(--font-light);
+  padding-top: var(--padding-section);
+  padding-bottom: 50px;
+}
+
+.tickets p {
+  font-size: var(--font-regular);
+  font-weight: var(--font-light);
+  padding: 40px 0 20px;
+}
+
+.tickets a,
+a.button {
+  margin-top: 10px;
+  padding: 10px 25px;
+  color: white;
+  background-color: var(--highlight-color);
+  text-decoration: none;
+  font-size: var(--font-regular);
+  font-weight: var(--font-weight-bold);
+}
+
+a.button:hover,
+.tickets a:hover {
+  background-color: var(--hover-color);
+  text-decoration: none;
+}
+
+.speakers-container,
+.papers,
+.sponsors,
+.team {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+}
+
+.speakers-container {
+  padding-bottom: 65px;
+}
+
+.speaker-block {
+  display: inline-block;
+  position: relative;
+  width: 280px;
+  height: 378px;
+  border: var(--border-light);
+  margin: 5px;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.speaker-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.speaker-block:hover .speaker-hover {
+  opacity: 1;
+}
+
+.speaker-block img {
+  width: 279px;
+  height: 230px;
+}
+
+.speaker-block h2 {
+  color: var(--highlight-color);
+  font-size: var(--heading-small);
+  font-weight: var(--font-weight-bold);
+  margin: 30px 0 4px;
+}
+
+.speaker-block p {
+  font-size: var(--font-regular);
+  padding-top: 5px;
+  font-weight: 300;
+}
+
+section.schedule {
+  border: var(--border-light);
+  padding-bottom: 60px;
+}
+
+.table-grid {
+  margin: 0 auto;
+  font-size: 26px;
+  text-align: left;
+  width: var(--max-width-container);
+}
+
+.table-grid tr,
+.table-grid td {
+  border-top: var(--border-light);
+}
+
+.table-grid td {
+  padding: 10px 0 10px 35px;
+}
+
+.table-grid h2 {
+  font-size: 20px;
+  color: var(--highlight-color);
+  padding-top: 10px;
+}
+
+.schedule-photo img {
+  width: 130px;
+  height: 110px;
+}
+
+.address {
+  padding: 50px 0 35px;
+  width: var(--max-width-container);
+  text-align: left;
+}
+
+.address p {
+  padding-top: 5px;
+}
+
+.location img {
+  width: 2050px;
+  height: 500px;
+}
+
+.papers {
+  font-size: var(--font-regular);
+  padding-bottom: 50px;
+  text-align: left;
+}
+
+.papers a,
+.team a {
+  text-decoration: none;
+  color: var(--highlight-color);
+  font-weight: var(--font-weight-bold);
+}
+
+.papers a:hover,
+.team a:hover {
+  text-decoration: underline;
+}
+
+.sponsors dt {
+  text-align: left;
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  padding-bottom: 10px;
+}
+
+.sponsors dl {
+  text-align: left;
+}
+
+.sponsors dl img,
+dd.support img {
+  height: auto;
+}
+
+.sponsors dl img {
+  max-width: 300px;
+}
+
+dd.support img {
+  max-width: 200px;
+}
+
+footer {
+  height: 340px;
+  color: white;
+  background: url(images/people.jpg) center center / cover no-repeat;
+}
+
+footer h1 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: var(--font-light);
+  padding: 35px 0 30px;
+}
+
+.team-container {
+  height: 185px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.team {
+  text-align: left;
+}
+
+.team h1 {
+  text-align: left;
+  font-size: var(--heading-medium);
+  padding-top: 15px;
+  color: white;
+  padding-bottom: 0;
+}
+
+.team p {
+  color: white;
+  font-size: var(--font-regular);
+  padding-bottom: 10px;
+}
+
+div a.button {
+  color: white;
+  font-size: var(--font-regular);
+  font-weight: var(--font-weight-bold);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
