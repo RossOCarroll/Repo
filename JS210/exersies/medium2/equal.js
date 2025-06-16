@@ -1,4 +1,8 @@
-const person = { name: 'Victor' };
-const otherPerson = person;
+let a = [1, 2, 3];
 
-console.log(person === otherPerson);    // false -- expected: true
+function myValue(b) {
+  b[2] += 7;
+}
+
+myValue(a);
+console.log(a);

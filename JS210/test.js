@@ -1,8 +1,3 @@
-function addName(arr, name) {
-  arr = arr.concat(name);
-  console.log(arr);
-}
+let obj = { enabled: false };
 
-let names = ["bob", "kim"];
-addName(names, "jim");
-console.log(names); // => [ 'bob', 'kim' ]
+console.log(obj['enabled']);
