@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://dbdwvr6p7sskw.cloudfront.net/210/files/email_data_v2.js"></script>
+<script>
+  function mailCount(emailData) {
+  let emails = emailData.split('##||##');
+  let numberOfEmails = emails.length;
+  let dates = [];
+
+  emails.forEach(email => {
+    dates.push(new Date(email.split('#/#')[2].slice(7)));
+  })
+
+  let sortedDates = dates.sort((a, b) => a - b);
+  let oldestDate = sortedDates[0];
+  let newestDate = sortedDates[sortedDates.length - 1];
+
+  console.log(`
+    Count of Email: ${numberOfEmails}
+    Date Range: ${oldestDate.toDateString()} - ${newestDate.toDateString()}
+  `);
+}
+
+mailCount(emailData);
+
+// console output
+
+// Count of Email: 5
+// Date Range: Sat Jun 25 2016 - Thu Aug 11 2016
+</script>
+</head>
+<body>
+  
+</body>
+</html>
