@@ -11,7 +11,7 @@ least one row and one column.
 */
 
 function transpose(matrix) {
-  let newMatrix = [];
+  const newMatrix = [];
 
   for (let col = 0; col < matrix[0].length; col++) {
     let newRow = [];    
