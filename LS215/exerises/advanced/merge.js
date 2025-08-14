@@ -42,23 +42,36 @@ Algorithm:
 
 */
 
+// function merge(arr1, arr2) {
+//   let numbers = arr1.concat(arr2);
+//   let swapped = true;
+//   let index = 0;
+
+//   do {
+//     swapped = false;
+
+//     for (let i = 0; i < numbers.length; i++) {
+//       if (numbers[i] > numbers[i + 1]) {
+//         [numbers[i], numbers[i + 1]] = [numbers[i + 1], numbers[i]]
+//         swapped = true;
+//       }      
+//     }
+//   } while (swapped)
+
+//   return numbers;
+// }
+
+
 function merge(arr1, arr2) {
-  let numbers = arr1.concat(arr2);
-  let swapped = true;
-  let index = 0;
+  let result = [];
+  let copy1 = arr1.slice();
+  let copy2 = arr2.slice();
 
-  do {
-    swapped = false;
+  while(copy1.length > 0 && copy2.length > 0) {
+    result.push(copy1[0] <= copy2[0] ? copy1.shift() : copy2.shift())
+  }
 
-    for (let i = 0; i < numbers.length; i++) {
-      if (numbers[i] > numbers[i + 1]) {
-        [numbers[i], numbers[i + 1]] = [numbers[i + 1], numbers[i]]
-        swapped = true;
-      }      
-    }
-  } while (swapped)
-
-  return numbers;
+  return result.concat(copy1.length === 0 ? copy2 : copy1);
 }
 
 
