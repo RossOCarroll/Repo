@@ -1,36 +1,14 @@
-function extend(destination, ...sources) {
-
-  sources.forEach(source => {
-    for (let prop in source) {
-      destination[prop] = source[prop];
-    }
-  })
-  return newObj;
+function partial(fn, ...fixedArgs) {
+  return function(...restArgs) {
+    return fn(...fixedArgs, ...restArgs);
+  }
 }
 
-let foo = {
-  a: 0,
-  b: {
-    x: 1,
-    y: 2,
-  },
+
+function sum(a, b) {
+  return a + b;
 };
 
-let joe = {
-  name: 'Joe'
-};
+let add5 = partial(sum, 5);
+console.log(add5(100));
 
-let funcs = {
-  sayHello() {
-    console.log('Hello, ' + this.name);
-  },
-
-  sayGoodBye() {
-    console.log('Goodbye, ' + this.name);
-  },
-};
-
-let object = extend({}, foo, joe, funcs);
-
-console.log(object.b.x);          // => 1
-object.sayHello();                // => Hello, Joe
