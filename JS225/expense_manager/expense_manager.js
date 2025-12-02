@@ -9,7 +9,7 @@ class Expense {
   constructor(id, amount, date, category) {
 
     if (amount <= 0) {
-      throw new Error('Amount mus be greater then 0.')
+      throw new Error('Amount must be greater than 0.')
     }
 
     const parsedDate = new Date(date)
@@ -104,6 +104,7 @@ class ExpenseManager {
     const average = count ? total / count : 0;
     return { total, count, average };
   }
+
   filterExpensesByCategory(category) {
     category = category.trim().toLowerCase();
     return this.#expenses.filter(expense => expense.category === category);
@@ -150,7 +151,7 @@ class BudgetExpenseManager extends ExpenseManager {
 
   summarizeExpenses() {
     const baseSummary = super.summarizeExpenses();
-    const remaining = this.#budgetLimit;
+    const remaining = this.remainingBudget();
 
     return {
       ...baseSummary,
@@ -162,10 +163,6 @@ class BudgetExpenseManager extends ExpenseManager {
   remainingBudget() {
     return this.#budgetLimit - this._getTotalExpenses();
   }
-
-
-
-
 }
 
 export {Expense, ExpenseManager, BudgetExpenseManager};

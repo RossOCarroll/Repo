@@ -50,7 +50,7 @@ try {
 
 try {
   console.log('- The category must be a non-empty string.')
-  const expense = new Expense(1, 110, '2030-11-06', ' ');
+  const expense = new Expense(1, 110, '2025-11-06', ' ');
   fail('should throw error for empty category string.')
 } catch(_) {
   pass('category must be a non-empty string.')
@@ -231,7 +231,7 @@ try {
 try {
   console.log('- Prevents adding expenses that would cause the total to exceed the budget.')
   const manager = new BudgetExpenseManager(100);
-  manager.addExpense({amount: 101, date: '2025-11-06', category: 'eating out'});
+  manager.addExpense({amount: 101, date: '2025-11-06', category: 'food'});
   fail('should throw error when trying to add an expense that exceeds the allowed budget')
 } catch(_) {
   pass('cannot add expenses that exceed the allowed budget');
@@ -249,6 +249,52 @@ try {
   assert(summary.average === 30, 'average should be 30');
   assert(summary.count === 2, 'count should be 2');
   assert(manager.remainingBudget() === 40, 'remaining budget should be 40')
+  assert(summary.remainingBudget === 40, 'summary remaining budget should be 40');
   assert(summary.budgetLimit === 100, 'Budget limit should be 100');
   pass('Summary report shows how much budget should be used');
 } catch(error) { fail(error.message) };
+
+
+// === Additional Tests ===
+
+console.log('\n=== Additional Tests ===\n');
+
+try {
+  console.log('- Test adding several expenses, removing one, and verifying the remaining expenses are correct.');
+  const manager = new ExpenseManager();
+  manager.addExpense({amount: 20, date: '2025-11-05', category: 'entertainment'});
+  manager.addExpense({amount: 40, date: '2025-11-05', category: 'entertainment'});
+  manager.addExpense({amount: 200, date: '2025-11-06', category: 'food'});
+  manager.removeExpenseById(1);
+  assert(manager.expenses.length === 2, 'After adding 3 expenses and removing 1 expenses should be 2');
+  pass('We show 2 expenses')
+} catch(error) { fail(error.message) };
+
+try {
+  console.log('- Filter by category with no expenses');
+  const manager = new ExpenseManager();
+  manager.addExpense({amount: 20, date: '2025-11-05', category: 'entertainment'});
+  manager.addExpense({amount: 40, date: '2025-11-05', category: 'entertainment'});
+  const filtered = manager.filterExpensesByCategory('food');
+  assert(filtered.length === 0, 'Filtered expenses should be 0');
+  pass('If filtered by a category that no expense has return empty object');
+} catch(error) { fail(error.message) };
+
+try {
+  console.log('- Testing input validation for category');
+  const manager = new ExpenseManager();
+  manager.addExpense({amount: 20, date: '2025-11-05', category: 'fooD'});
+  manager.addExpense({amount: 40, date: '2025-11-05', category: 'FOOD'});
+  manager.addExpense({amount: 40, date: '2025-11-05', category: 'food'});
+  const filtered = manager.filterExpensesByCategory('food');
+  assert(filtered.length === 3, 'Filtered expenses should be 3');
+  pass('When adding expenses that are have unusual caps');
+} catch(error) { fail(error.message) };
+
+try {
+  console.log('- add an expense that exactly equals the remaining budget');
+  const manager = new BudgetExpenseManager(100);
+  manager.addExpense({amount: 100, date: '2025-11-05', category: 'food'});
+  assert(manager.remainingBudget() === 0, 'Remaining budget should equal 0');
+  pass('When adding an expense that is the same amount as the budget');
+}catch(error) { fail(error.message) };
