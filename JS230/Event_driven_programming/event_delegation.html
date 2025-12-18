@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #message {
+      padding: .5em .8em;
+      background-color: lightyellow;
+      display: inline-block;
+    }
+  </style>
+  <script>
+    function clickHandler(event) {
+      let message = document.getElementById('message');
+      message.textContent = `${event.target.textContent} was clicked!`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let buttons = document.querySelectorAll('button');
+
+      for (let index = 0; index < buttons.length; index += 1) {
+        buttons[index].addEventListener('click', clickHandler);
+      }
+    });
+  </script>
+</head>
+<body>
+  <button>One</button>
+  <button>Two</button>
+  <button>Three</button>
+  <button>Four</button>
+
+  <div>
+    <p>
+      <button>Five</button>
+      <button>Six</button>  
+      <button>Seven</button>
+      <button>Eight</button>
+    </p>
+  </div>
+
+<div id="message"></div>
+</body>
+</html>

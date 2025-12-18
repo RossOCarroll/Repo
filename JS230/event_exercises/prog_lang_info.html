@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Languages</title>
+  <style>
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    body {
+      background: #990;
+    }
+
+    #languages {
+      box-sizing: border-box;
+      padding: 20px;
+      width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 4px;
+    }
+
+    .more {
+      display: inline-block;
+      text-decoration: none;
+      background: #990;
+      color: #fff;
+      text-align: center;
+      width: 90px;
+      border-radius: 4px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Programming Languages</h1>
+  <div id="languages">
+
+  </div>
+
+  <script>
+    const languages = [
+      {
+        name: 'Ruby',
+        description: 'Ruby is a dynamic, reflective, object-oriented, ' +
+                    'general-purpose programming language. It was designed and developed in the mid-1990s ' +
+                    'by Yukihiro Matsumoto in Japan. According to its creator, Ruby was influenced by Perl, ' +
+                    'Smalltalk, Eiffel, Ada, and Lisp. It supports multiple programming paradigms, ' +
+                    'including functional, object-oriented, and imperative. It also has a dynamic type ' +
+                    'system and automatic memory management.'
+      },
+
+      {
+        name: 'JavaScript',
+        description: 'JavaScript is a high-level, dynamic, untyped, and interpreted ' +
+                    'programming language. It has been standardized in the ECMAScript language ' +
+                    'specification. Alongside HTML and CSS, JavaScript is one of the three core ' +
+                    'technologies of World Wide Web content production; the majority of websites employ ' +
+                    'it, and all modern Web browsers support it without the need for plug-ins. JavaScript ' +
+                    'is prototype-based with first-class functions, making it a multi-paradigm language, ' +
+                    'supporting object-oriented, imperative, and functional programming styles.'
+      },
+
+      {
+        name: 'Lisp',
+        description: 'Lisp (historically, LISP) is a family of computer programming languages ' +
+                    'with a long history and a distinctive, fully parenthesized prefix notation. ' +
+                    'Originally specified in 1958, Lisp is the second-oldest high-level programming ' +
+                    'language in widespread use today. Only Fortran is older, by one year. Lisp has changed ' +
+                    'since its early days, and many dialects have existed over its history. Today, the best ' +
+                    'known general-purpose Lisp dialects are Common Lisp and Scheme.'
+      },
+    ];
+
+    function sliceText(text) {
+      return text.slice(0, 120) + '...';
+    }
+
+    function createAnchor() {
+      const a = document.createElement('a');
+      a.classList.add('more');
+      a.href = '#';
+      return a;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const languageContainer = document.getElementById('languages');
+
+      languages.forEach(language => {
+        const div = document.createElement('div');
+        const h2 = document.createElement('h2');
+        const p = document.createElement('p');
+        const showMore = createAnchor();
+        const showLess = createAnchor();
+        showLess.classList.add('hidden');
+        showMore.textContent = 'Show More';
+        showLess.textContent = 'Show Less';
+
+        h2.textContent = language.name;
+        p.textContent = sliceText(language.description);
+
+        showMore.addEventListener('click', event => {
+          event.preventDefault();
+          p.textContent = language.description;
+          showMore.classList.add('hidden');
+          showLess.classList.remove('hidden');
+        });
+
+        showLess.addEventListener('click', event => {
+          event.preventDefault();
+          p.textContent = sliceText(language.description);
+          showMore.classList.remove('hidden');
+          showLess.classList.add('hidden');
+        })
+
+        div.appendChild(h2);
+        div.appendChild(p);
+        div.appendChild(showMore);
+        div.appendChild(showLess);
+
+        languageContainer.appendChild(div);
+      })
+    })
+  </script>
+</body>
+</html>

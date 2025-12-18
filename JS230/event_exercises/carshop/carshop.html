@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="carshop.css">
+  <script src="carshop.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Buy Used Cars</h1>
+    <div class="filters">
+      <label for="make_select">Make</label>
+      <select name="make" id="make_select">
+        <option value="">Any</option>
+      </select>
+      <label for="model_select">Model</label>
+      <select name="model" id="model_select">
+        <option value="">Any</option>
+      </select>
+      <label for="price_select">Price</label>
+      <select name="price" id="price_select">
+        <option value="">Any</option>
+      </select>
+      <label for="year_select">Year</label>
+      <select name="year" id="year_select">
+        <option value="">Any</option>
+      </select>
+      <button class="filter_btn">Filter</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="cars">
+      <div class="car">
+        <figure>
+          <img src="car_images/honda-accord-2005.jpg" alt="Honda accord">
+        </figure>
+        <h2>Honda Accord</h2>
+        <p class="year">Year: 2005</p>
+        <p class="price">Price: $7000</p>
+        <a href="#">Buy</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

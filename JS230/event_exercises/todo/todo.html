@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <h2>Todos</h2>
+  <ul class="todos"></ul>
+
+  <div class="overlay"></div>
+
+  <div class="confirm_prompt"></div>
+
+  <script>
+    let todoItems = [
+      {id: 1, title: 'Homework'},
+      {id: 2, title: 'Shopping'},
+      {id: 3, title: 'Calling Mom'},
+      {id: 4, title: 'Coffee with Elphaba'},
+    ];
+
+    function createButton(type) {
+      const btn = document.createElement('a');
+      btn.textContent = `${type[0].toUpperCase() + type.slice(1)}`;
+      btn.classList.add(`confirm_${type}`);
+      btn.href = '#';
+
+      return btn;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const listContainer = document.querySelector('ul');
+      const confirmPrompt = document.querySelector('.confirm_prompt');
+      const overlay = document.querySelector('.overlay');
+
+      const yesBtn = createButton('yes');
+      const noBtn = createButton('no');
+      const actionsDiv = document.createElement('div');
+      actionsDiv.classList.add('actions');
+      actionsDiv.appendChild(yesBtn);
+      actionsDiv.appendChild(noBtn);
+      confirmPrompt.appendChild(actionsDiv);
+
+      todoItems.forEach(todo => {
+        const todoItem = document.createElement('li');
+        const span = document.createElement('span');
+        todoItem.textContent = todo.title;
+        span.classList.add('remove');
+
+        span.addEventListener('click', event => {
+          overlay.style.display = 'block';
+          confirmPrompt.style.display = 'block';
+          confirmPrompt.dataset.todoId = todo.id;
+          let msg = confirmPrompt.querySelector('p');
+          if (!msg) {
+            msg = document.createElement('p');
+            confirmPrompt.insertBefore(msg, actionsDiv);
+          }
+          msg.textContent = `Are you sure you want to delete "${todo.title}"?`;
+        });
+
+        todoItem.appendChild(span);
+        listContainer.appendChild(todoItem);
+      });
+
+      yesBtn.addEventListener('click', event => {
+        const id = Number(confirmPrompt.dataset.todoId);
+        const todo = todoItems.find(todo => todo.id === id);
+        const todoToRemove = Array.from(document.querySelectorAll('li')).find(li => li.textContent.includes(todo.title));
+        if (todoToRemove) todoToRemove.remove();
+        overlay.style.display = 'none';
+        confirmPrompt.style.display = 'none';
+      })
+
+      noBtn.addEventListener('click', event => {
+        overlay.style.display = 'none';
+        confirmPrompt.style.display = 'none';
+      })
+
+      overlay.addEventListener('click', event => {
+        overlay.style.display = 'none';
+        confirmPrompt.style.display = 'none';
+      })
+    })
+  </script>
+</body>
+</html>

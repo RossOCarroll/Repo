@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      display: block;
+      width: 15%;
+      margin-top: 10px;
+      cursor: auto;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('img').addEventListener('click', event => {
+        event.preventDefault();
+      }, false);      
+    })
+
+  </script>
+</head>
+
+<body>
+  <a href="https://www.launchschool.com">
+    Home
+    <img alt src="https://d1nrfq3cstnmkv.cloudfront.net/exercises/events_event_handlers/ls_logo.png" />
+  </a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.querySelector('html').addEventListener('click', () => {
+
+     const container = document.querySelector('#container');
+
+     if (!container.contains(event.target)) {
+      container.style = 'display: none';
+     }
+    });
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

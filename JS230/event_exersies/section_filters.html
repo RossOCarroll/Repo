@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  const vertebrates = ['Bear', 'Turtle', 'Whale', 'Salmon', 'Ostrich'];
+  const warmBlooded = ['Bear', 'Whale', 'Ostrich'];
+  const coldBlooded = ['Salmon', 'Turtle'];
+  const mammal = ['Bear', 'Whale'];
+  const bird = ['Ostrich'];
+  const bear = ['Vertebrate', 'Warm-blooded', 'Mammal'];
+  const turtle = ['Vertebrate', 'Cold-blooded'];
+  const whale = ['Vertebrate', 'Warm-blooded', 'Mammal'];
+  const salmon = ['Vertebrate', 'Cold-blooded'];
+  const ostrich = ['Vertebrate', 'Warm-blooded', 'Bird'];
+
+  function createList(list, filteredList, options) {
+    filteredList.forEach(name => {
+        const option = options.find(opt => opt.value === name);
+        if (option) list.appendChild(option.cloneNode(true));
+      })
+  }
+
+
+  document.addEventListener('DOMContentLoaded', () =>{
+    const classifications = document.getElementById('animal-classifications');
+    const animals = document.getElementById('animals');
+    const clearButton = document.getElementById('clear');
+    const allAnimalOptions = Array.from(animals.options);
+    const allClassifications = Array.from(classifications.options);
+
+
+    classifications.addEventListener('change', event => {
+      const value = event.target.value;
+      
+
+      let filteredList = [];
+      if (value === 'Vertebrate') filteredList = vertebrates;
+      else if (value === 'Warm-blooded') filteredList = warmBlooded;
+      else if (value === 'Cold-blooded') filteredList = coldBlooded;
+      else if (value === 'Mammal') filteredList = mammal;
+      else if (value === 'Bird') filteredList = bird;
+      else filteredList = allAnimalOptions.map(opt => opt.value);
+
+      animals.innerHTML = '';
+
+      createList(animals, filteredList, allAnimalOptions);
+    });
+
+    animals.addEventListener('change', event => {
+      const value = event.target.value;
+      let filteredList = [];
+
+      if (value === 'Bear') filteredList = bear;
+      else if (value === 'Turtle') filteredList = turtle;
+      else if (value === 'Whale') filteredList = whale;
+      else if (value === 'Salmon') filteredList = salmon;
+      else if (value === 'Ostrich') filteredList = ostrich;
+      else filteredList = allClassifications.map(opt => opt.value);
+
+      classifications.innerHTML = '';
+
+      createList(classifications, filteredList, allClassifications);
+    })
+
+    clearButton.addEventListener('click', event => {
+      classifications.value = 'Classifications';
+      animals.innerHTML = '';
+      allAnimalOptions.forEach(opt => animals.appendChild(opt.cloneNode(true)));
+
+      classifications.innerHTML = '';
+      allClassifications.forEach(opt => classifications.appendChild(opt.cloneNode(true)));
+      classifications.value = 'Classifications';
+    })
+  })
+</script>
+<body>
+  <form id="selection-filters" method="post" action="#">
+    <select id="animal-classifications">
+      <option value="Classifications" selected>Classifications</option>
+      <option value="Vertebrate">Vertebrate</option>
+      <option value="Warm-blooded">Warm-blooded</option>
+      <option value="Cold-blooded">Cold-blooded</option>
+      <option value="Mammal">Mammal</option>
+      <option value="Bird">Bird</option>
+    </select>
+    <select id="animals">
+      <option value="Animals" selected>Animals</option>
+      <option value="Bear">Bear</option>
+      <option value="Turtle">Turtle</option>
+      <option value="Whale">Whale</option>
+      <option value="Salmon">Salmon</option>
+      <option value="Ostrich">Ostrich</option>    
+    </select>
+    <button id="clear" type="button">Clear</button>  
+  </form>
+</body>
+</html>

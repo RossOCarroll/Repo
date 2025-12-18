@@ -1,0 +1,30 @@
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Bold Element + Custom</title>
+  </head>
+  <script>
+    function makeBold(elem) {
+      elem.style.fontWeight = 'bold';
+      let bolded = new CustomEvent('bolded');
+
+      elem.dispatchEvent(bolded);
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const section = document.querySelector('section');
+
+      section.addEventListener('bolded', () => {
+        console.log('Custom even bolded is executed');
+      })
+
+      makeBold(section);
+
+    })
+  </script>
+  <body>
+    <section>Hello World</section>
+    <p>Greetings!</p>
+  </body>
+</html>
