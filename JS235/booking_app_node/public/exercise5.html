@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking App</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <script defer src="javascripts/javascript5.js"></script>
+</head>
+<body>
+  <h1>Book a Schedule</h1>
+
+  <form id="schedule_form">
+    <label for="schedules">Select Schedule:</label>
+    <select name="schedules" id="schedules">
+      <option value="">-- Choose a Schedule --</option>
+    </select>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <button type="submit">Book</button>
+  </form>
+
+  <!-- New Student Form -->
+  <form id="new_student" style="display: none;">
+    <h2>Sign Up New Student</h2>
+    <label for="new_email">Email:</label>
+    <input type="email" id="new_email" name="new_email" readonly>
+
+    <label for="booking_sequence">Booking Sequence:</label>
+    <input type="text" id="booking_sequence" name="booking_sequence" readonly>
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <button type="submit">Register & Book</button>
+  </form>
+</body>
+</html>

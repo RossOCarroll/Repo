@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <script src="javascripts/javascript7.js" defer></script>
+</head>
+<body>
+  <h1>Cancellations</h1>
+
+  <form action="/api/bookings/" method="PUT" id="cancelBooking">
+    <label for="booking_id">Booking ID:</label>
+    <input type="text" id="booking_id" name="booking_id" required>
+    <input type="submit" value="Cancel Booking">
+  </form>
+
+  <form action="/api/schedules/" method="PUT" id="cancelSchedule">
+    <label for="schedule_id">Schedule ID:</label>
+    <input type="text" id="schedule_id" name="schedule_id" required>
+    <input type="submit" value="Cancel Schedule">
+  </form>
+</body>
+</html>
