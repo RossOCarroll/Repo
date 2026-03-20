@@ -1,16 +1,14 @@
-// Example usage:
-
-function retryOperation(operation) {
-  let tries = 2;
-  if (operation.then())
+function timeout(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Done');
+    }, ms)
+  })
 }
 
+function fetchWithTimeOut(url) {
+  return Promise.race([fetch(url), timeout(5000)]);
+}
 
-retryOperation(
-  () =>
-    new Promise((resolve, reject) =>
-      Math.random() > 0.33
-        ? resolve("Success!")
-        : reject(new Error("Fail!"))
-    )
-);
+fetchWithTimeOut('/users').then(() => console.log('succsess'))
+  .catch((error) => console.log(error))

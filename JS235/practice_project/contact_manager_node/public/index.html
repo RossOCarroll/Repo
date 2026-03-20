@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <script src="/javascripts/javascript.js"></script>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <style>
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <header class="bs-header">
+    <div class="container">
+      <a href="#home"><h1>Contact Manager</h1></a>
+      <p>Using Backbone.js, Localstorage, RequireJS, Handlebar and Bootstrap</p>
+    </div>
+  </header>
+
+  <div class="col-xs-12 main-container">
+    <div>
+      <div class="row well">
+        <div class="text-center col-sm-6">
+          <button id="add-contact-button" class="btn btn-lg btn-outline">
+            Add Contact
+          </button>
+        </div>
+  
+        <div class="text-center col-sm-6">
+          <input
+            type="text"
+            class="form-control contact-name-search"
+            placeholder="Search"
+            id="search-input"
+          >
+        </div>
+
+        <div class="text-center col-sm-12" style="margin-top: 10px;">
+          <select id="tag-filter" class="form-control">
+            <option value="">All Tags</option>
+            <option value="marketing">Marketing</option>
+            <option value="sales">Sales</option>
+            <option value="engineering">Engineering</option>
+            <option value="friend">Friend</option>
+            <option value="work">Work</option>
+          </select>
+        </div>
+      </div>
+  
+      <ul id="contact-list" class="media-list row contacts-container">
+      </ul>
+  
+      <div id="placeholder" class="empty-contacts-placeholder">
+        <div class="well text-center">
+          <h3>There is no contacts.</h3>
+          <button id="add-contact-button-main" class="btn btn-lg btn-outline">
+            Add Contact
+          </button>
+        </div>
+      </div>
+  
+      <div id="empty-search" class="empty-search-contacts-placeholder">
+        <div class="well text-center">
+          <h3>There is no contacts starting with <strong></strong>.
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="form-div" class="col-xs-12 main-container" hidden>
+    <h2 class="page-header text-center">Create Contact</h2>
+
+    <form id="create-contact-form" role="form" class="form-horizontal contact-form">
+      
+      <div id="name" class="form-group has-feedback form-group-name">
+        <label class="col-sm-4 control-label">Full name:</label>
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control contact-name-input"
+            value=""
+            name="name"
+          >
+        </div>
+      </div>
+
+      <div id="email" class="form-group has-feedback form-group-email">
+        <label class="col-sm-4 control-label">Email address:</label>
+        <div class="col-sm-6">
+          <input
+            type="email"
+            class="form-control contact-email-input"
+            value=""
+            name="email"
+          >
+        </div>
+      </div>
+
+      <div id="phone" class="form-group has-feedback form-group-phone">
+        <label class="col-sm-4 control-label">Telephone number:</label>
+        <div class="col-sm-6">
+          <input
+            type="tel"
+            class="form-control contact-phone-input"
+            value=""
+            name="phone"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-3">
+          <button type="submit" class="btn btn-outline btn-lg btn-block">
+            Submit
+          </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button id="cancel-button" class="btn-close-form btn btn-outline btn-lg btn-block">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Tags:</label>
+      
+        <div class="col-sm-6">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="marketing">
+              Marketing
+            </label>
+          </div>
+      
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="sales">
+              Sales
+            </label>
+          </div>
+      
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="engineering">
+              Engineering
+            </label>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="engineering">
+              Friend
+            </label>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="engineering">
+              Work
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div id="edit-form-div" class="col-xs-12 main-container" hidden>
+    <h2 class="page-header text-center">Edit Contact</h2>
+
+    <form id="edit-contact-form" role="form" class="form-horizontal contact-form">
+      
+      <div id="name" class="form-group has-feedback form-group-name">
+        <label class="col-sm-4 control-label">Full name:</label>
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control contact-name-input"
+            value=""
+            name="name"
+          >
+        </div>
+      </div>
+
+      <div id="email" class="form-group has-feedback form-group-email">
+        <label class="col-sm-4 control-label">Email address:</label>
+        <div class="col-sm-6">
+          <input
+            type="email"
+            class="form-control contact-email-input"
+            value=""
+            name="email"
+          >
+        </div>
+      </div>
+
+      <div id="phone" class="form-group has-feedback form-group-phone">
+        <label class="col-sm-4 control-label">Telephone number:</label>
+        <div class="col-sm-6">
+          <input
+            type="tel"
+            class="form-control contact-phone-input"
+            value=""
+            name="phone"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-3">
+          <button type="submit" class="btn btn-outline btn-lg btn-block">
+            Submit
+          </button>
+        </div>
+
+        <div class="col-sm-3">
+          <button id="cancel-edit" class="btn-close-form btn btn-outline btn-lg btn-block">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Tags:</label>
+      
+        <div class="col-sm-6">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="marketing">
+              Marketing
+            </label>
+          </div>
+      
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="sales">
+              Sales
+            </label>
+          </div>
+      
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="engineering">
+              Engineering
+            </label>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="friend">
+              Friend
+            </label>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="tags" value="work">
+              Work
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+</body>
+</html>
