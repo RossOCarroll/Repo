@@ -3,6 +3,7 @@
     "Carshop",
     "centiseconds",
     "mult",
-    "potentialtarget"
+    "potentialtarget",
+    "templater"
   ]
 }
