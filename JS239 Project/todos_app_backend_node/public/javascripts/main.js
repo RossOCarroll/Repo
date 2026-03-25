@@ -90,6 +90,14 @@ class App {
     this.modalDiv.style.display = 'block';
   }
 
+  getCurrentState() {
+    return {
+      active_date_all: this.todosData.active_date_all,
+      active_date_completed: this.todosData.active_date_completed,
+      section: this.todosData.current_section.title    
+    };
+  }
+
   async fetchTodos() {
     try {
       const response = await fetch('/api/todos');
@@ -100,29 +108,48 @@ class App {
     }
   }
 
-  async loadTodos() {
+  async loadTodos(prevState = {}) {
     const list = await this.fetchTodos();
     if (!list) return;
-
+  
     this.todosData.todos = list.map(todo => {
-      const due_date = todo.day && todo.month && todo.year
+      const hasMonth = todo.month && todo.month !== '';
+      const hasYear = todo.year && todo.year !== '';
+      const due_date = hasMonth && hasYear
         ? `${todo.month.padStart(2,'0')}/${todo.year.slice(-2)}`
         : 'No Due Date';
       return { ...todo, due_date };
     });
-
+  
     this.todosData.done = this.todosData.todos.filter(todo => todo.completed);
-    this.todosData.selected = this.todosData.todos;
-
-    this.todosData.active_date_all = null;
-    this.todosData.active_date_completed = null;
-
+  
     this.populateTodosByDate();
-    this.todosData.current_section = {
-      title: 'All Todos',
-      data: this.todosData.selected.length
-    };
-
+  
+    let selected = [];
+    let current_section = { title: 'All Todos', data: this.todosData.todos.length };
+    let active_date_all = null;
+    let active_date_completed = null;
+  
+    if (prevState.active_date_all) {
+      selected = this.todosData.todos_by_date[prevState.active_date_all] || [];
+      current_section = { title: prevState.active_date_all, data: selected.length };
+      active_date_all = prevState.active_date_all;
+    } else if (prevState.active_date_completed) {
+      selected = this.todosData.done_todos_by_date[prevState.active_date_completed] || [];
+      current_section = { title: prevState.active_date_completed, data: selected.length };
+      active_date_completed = prevState.active_date_completed;
+    } else if (prevState.section === 'Completed') {
+      selected = this.todosData.done;
+      current_section = { title: 'Completed', data: selected.length };
+    } else {
+      selected = this.todosData.todos;
+    }
+  
+    this.todosData.selected = selected;
+    this.todosData.current_section = current_section;
+    this.todosData.active_date_all = active_date_all;
+    this.todosData.active_date_completed = active_date_completed;
+  
     this.renderHtml();
   }
 
@@ -159,6 +186,8 @@ class App {
     if (todo.due_month && todo.due_month !== 'Month') payload.month = todo.due_month;
     if (todo.due_year && todo.due_year !== 'Year') payload.year = todo.due_year;
 
+    console.log(payload);
+
     if (this.editingId) {
       await this.updateTodo(this.editingId, payload);
       this.editingId = null;
@@ -166,9 +195,10 @@ class App {
       await this.addTodo(payload);
     }
   
+    const prevState = this.getCurrentState();
     this.closeModal();
     this.modalForm.reset();
-    await this.loadTodos();
+    await this.loadTodos(prevState);
   }
 
   async deleteTodo(id) {
@@ -197,7 +227,10 @@ class App {
     const id = Number(todoEle.dataset.id);
 
     const success = await this.deleteTodo(id);
-    if (success) await this.loadTodos();
+    if (success)  {
+      const prevState = this.getCurrentState();
+      await this.loadTodos(prevState);      
+    }
   }
 
   async fetchTodo(id) {
@@ -276,7 +309,9 @@ class App {
     this.modalForm.reset();
     this.editingId = null;
 
-    await this.loadTodos();
+    const prevState = this.getCurrentState();
+
+    await this.loadTodos(prevState);
   }
 
   async handleCheckbox(event) {
@@ -297,7 +332,9 @@ class App {
     const todo = this.todosData.todos.find(t => t.id === id);
     if (todo) todo.completed = checkboxInput.checked;
   
-    await this.loadTodos();
+    const prevState = this.getCurrentState();
+
+    await this.loadTodos(prevState);
   }
 
   handleAllLists(event) {  
