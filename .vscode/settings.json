@@ -4,6 +4,7 @@
     "centiseconds",
     "mult",
     "potentialtarget",
+    "strs",
     "templater"
   ]
 }

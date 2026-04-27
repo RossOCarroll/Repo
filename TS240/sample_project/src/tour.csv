@@ -1,0 +1,33 @@
+Date,City,Nights,Hotel Cost,Gear Security Risk,Notes
+9/10,Los Angeles,0,0,Low,Stay home
+9/11,San Diego,0,0,Low,Return to LA
+9/12,Phoenix,1,600,Medium,Stay north/suburbs not downtown
+9/13,El Paso,1,550,Low,Airport area safest
+9/14,Austin,1,600,High,Avoid East Austin street parking
+9/15,Austin,1,600,High,Same as above
+9/16,Denton,1,550,Low,Suburban safe zones
+9/17,Travel,1,300,Low,Highway hotel stop
+9/18,Atlanta,1,600,Medium,Stay outside downtown
+9/19,Nashville,1,550,Medium,Tourist zones = watch gear
+9/20,Asheville,1,550,Low,Generally safe
+9/21,Washington DC,1,600,High,Avoid street parking
+9/22,Washington DC,1,600,High,Same as above
+9/23,Philadelphia,1,600,High,Be careful with van parking
+9/24,Brooklyn,1,800,High,High theft risk area
+9/25,Brooklyn,1,800,High,Same as above
+9/26,Boston,1,750,Medium,Safer but still urban
+9/27,Albany,1,550,Low,Quieter city
+9/28,Travel,1,300,Low,Highway stop
+9/29,Detroit,1,550,Medium,Pick good neighborhood
+9/30,Chicago,1,650,High,High break-in risk zones
+10/1,Denver,1,600,Medium,Watch downtown areas
+10/2,Denver,1,600,Medium,Same
+10/3,Salt Lake City,1,550,Low,Generally safe
+10/4,Boise,1,500,Low,Very safe stop
+10/5,Travel,1,300,Low,Highway stop
+10/6,Seattle,1,700,High,Major theft risk city
+10/7,Portland,1,600,High,Very high van break-ins
+10/8,Travel,1,300,Low,Highway stop
+10/9,San Francisco,1,750,High,Top break-in city
+10/10,Los Angeles,0,0,Medium,Be cautious even at home
+TOTAL,,28,15100,,
